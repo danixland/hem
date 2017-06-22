@@ -56,7 +56,7 @@ get_header();
 			<pre>
 				<?php
 				$users = $hemUsers->getUsers();
-				printf($users);
+				print_r($users);
 				?>
 			</pre>
 		</div>
