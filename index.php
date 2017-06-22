@@ -21,12 +21,12 @@ get_header();
 			<?php
 			// This is a simple way of validating if a user is logged in or not.
 			// If the user is logged in, the value is (bool)true - otherwise (bool)false.
-			if( !$SimpleUsers->logged_in ) {
+			if( !$hemUsers->logged_in ) {
 				header("Location: login.php");
 				exit;
 			}
 
-			$user = $SimpleUsers->getSingleUser();
+			$user = $hemUsers->getSingleUser();
 			if( !$user )
 				die("The user could not be found...");
 
