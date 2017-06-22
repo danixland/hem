@@ -52,5 +52,14 @@ get_header();
 			</table>
 		</div>
 
+		<div>
+			<pre>
+				<?php
+				$users = hemUsers->getUsers();
+				printf($users);
+				?>
+			</pre>
+		</div>
+
 	</body>
 </html>
