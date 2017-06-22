@@ -114,7 +114,7 @@
 			if( $id == null )
 				$id = $_SESSION[$this->sessionName]["id"];
 
-			$sql = "SELECT infoKey, infoValue FROM users_information WHERE id=? ORDER BY infoKey ASC";
+			$sql = "SELECT user_login, user_email FROM users WHERE id=? ORDER BY user_login ASC";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
