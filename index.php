@@ -26,8 +26,7 @@ get_header();
 				exit;
 			}
 
-			$id = $_SESSION[$this->sessionName]["id"];
-			$user = $hemUsers->getSingleUser($id);
+			$user = $hemUsers->getSingleUser();
 			if( !$user )
 				die("The user could not be found...");
 
@@ -49,7 +48,6 @@ get_header();
 					<td><?php echo $user["user_email"]; ?></td>
 					<td><?php echo $user["user_registered"]; ?></td>
 					<td><?php echo $user["user_status"]; ?></td>
-					<td><?php ( !empty($user["display_name"]) ? echo $user["display_name"] : echo $user["user_login"]); ?></td>
 				</tr>
 			</table>
 		</div>
