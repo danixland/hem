@@ -26,7 +26,8 @@ get_header();
 				exit;
 			}
 
-			$user = $hemUsers->getSingleUser();
+			$id = $_SESSION[$this->sessionName]["id"];
+			$user = $hemUsers->getSingleUser($id);
 			if( !$user )
 				die("The user could not be found...");
 
