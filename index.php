@@ -48,7 +48,7 @@ get_header();
 					<td><?php echo $user["user_login"]; ?></td>
 					<td><?php echo $user["user_email"]; ?></td>
 					<td><?php echo $user["user_registered"]; ?></td>
-					<td><?php ( $user["user_status"] == 1 ? echo "user" : echo "admin"); ?></td>
+					<td><?php echo $user["user_status"]; ?></td>
 					<td><?php ( !empty($user["display_name"]) ? echo $user["display_name"] : echo $user["user_login"]); ?></td>
 				</tr>
 			</table>
