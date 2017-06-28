@@ -101,10 +101,17 @@ get_header();
                         <input type="text" name="display_name" id="display_name" />
                     </p>
 
+<<<<<<< HEAD
                     <p>
                         <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 5); ?>">
                         <input type="submit" name="submit" value="Register" />
                     </p>
+=======
+                <p>
+                    <input type="hidden" name="newusernonce" value="<?php $hemUsers->generateNonce("newusernonce", 5); ?>">
+                    <input type="submit" name="submit" value="Register" />
+                </p>
+>>>>>>> parent of d0c1d31... maybe now will work
 
                 </form>
 
@@ -121,7 +128,7 @@ get_header();
                     <input type="password" name="password" id="password" />
                 </p>
                 <p>
-                    <input type="hidden" name="loginnonce" value="<?php echo $hemUsers->generateNonce("loginnonce", 5); ?>">
+                    <input type="hidden" name="loginnonce" value="<?php $hemUsers->generateNonce("loginnonce", 5); ?>">
                     <input type="submit" name="submit" value="Login" />
                 </p>
 
