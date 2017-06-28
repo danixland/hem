@@ -75,7 +75,7 @@ get_header();
         </p>
         <?php endif; ?>
 
-        <?php if ( $action = "newuser" ) : ?>
+        <?php if ( $action == "newuser" ) : ?>
 
             <form method="post" action="">
                 <p>
