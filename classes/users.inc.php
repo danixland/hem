@@ -52,7 +52,7 @@
 
 		public function createUser( $username, $password, $email, $display_name )
 		{
-			$salt = $this->_generateSalt();
+			$salt = $this->_generateSalt(128);
 			$password = $salt.$password;
 			$activation_key = md5($salt.$email);
 			$status = intval(1); # 1 is a simple user. 10 is admin
@@ -164,7 +164,7 @@
 			if( $id == null )
 				$id = $_SESSION[$this->sessionName]["id"];
 
-			$salt = $this->_generateSalt();
+			$salt = $this->_generateSalt(128);
 			$password = $salt.$password;
 
 			$sql = "UPDATE users SET user_pass=SHA1(?), salt=? WHERE id=? LIMIT 1";
@@ -291,7 +291,7 @@
 		
 		public function getToken( $xhtml = true )
 		{
-			$token = $this->_generateSalt();
+			$token = $this->_generateSalt(128);
 			$name = "token_".md5($token);
 			
 			$_SESSION[$this->sessionName]["csrf_name"] = $name;
@@ -452,11 +452,15 @@
 		* @return String with 128 characters
 		*/
 
-		private function _generateSalt()
+		private function _generateSalt( $lenght = null )
 		{
 			$salt = null;
 
-			while( strlen($salt) < 128 )
+			if ( !$lenght ) {
+				$lenght = 10;
+			}
+
+			while( strlen($salt) < $lenght )
 				$salt = $salt.uniqid(null, true);
 
 			return substr($salt, 0, 128);
