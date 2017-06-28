@@ -289,22 +289,21 @@
 		* @return Returns a string with a HTML element and attributes
 		*/
 		
-		public function getToken( $xhtml = true )
-		{
-			$token = $this->_generateSalt(128);
-			$name = "token_".md5($token);
+		public function genToken( $secret ) {
+			$salt = $this->_generateSalt();
+			$name = $secret . "_" . md5($salt);
+			$token = sha1($secret . $salt);
 			
-			$_SESSION[$this->sessionName]["csrf_name"] = $name;
-			$_SESSION[$this->sessionName]["csrf_token"] = $token;
+			$_SESSION[$this->sessionName]["hem_csrf_name"] = $name;
+			$_SESSION[$this->sessionName]["hem_csrf_token"] = $token;
 			
-			$string = "<input type=\"hidden\" name=\"".$name."\" value=\"".$token."\"";
-			if($xhtml)
-				$string .= " />";
-			else
-				$string .= ">";
-			
+			$string = array(
+				"name" => $name,
+				"token" => $token
+			);
+
 			return $string;
-		}		
+		}
 		
 		/**
 		* Use this method when you wish to validate the CSRF token from your post data.
@@ -324,7 +323,7 @@
 				return true;
 				
 			return false;
-		}		
+		}
 
 		/**
 		* Validates if the user is logged in or not.

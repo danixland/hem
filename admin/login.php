@@ -83,7 +83,8 @@ get_header();
         <?php if ( isset($_GET["action"]) ) {
             $action = $_GET["action"];
         }
-        if ( $action == "newuser" ) : ?>
+        if ( $action == "newuser" ) : 
+            $secret = $hemUsers->genToken( "newUser" ); ?>
 
             <form method="post" action="">
                 <p>
@@ -107,7 +108,7 @@ get_header();
                 </p>
 
                 <p>
-                    <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 15); ?>">
+                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
                     <input type="submit" name="submit" value="Register" />
                 </p>
 
