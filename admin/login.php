@@ -8,11 +8,8 @@ $hemUsers = new hemUsers();
 if ( isset($_GET["action"]) ) { // do we have an action?
     $action = $_GET["action"];
     if ($action == "logout") { // if the action is "logout"
-        if (isset($_POST["logoutnonce"])) {
-            $nonce = $_POST["logoutnonce"];
-            $nonceCheck = $hemUsers->validateNonce("logoutnonce", $nonce);
-        }
-        if ( $nonceCheck ) {
+        $csrf = $hemUsers->validateToken();
+        if ( $csrf ) {
             $hemUsers->logoutUser();
             header("Location: ../index.php");
             exit;
@@ -21,11 +18,8 @@ if ( isset($_GET["action"]) ) { // do we have an action?
 
         }
     } elseif ($action == "newuser") { // if the action is "newuser"
-        if (isset($_POST["newusernonce"])) {
-            $nonce = $_POST["newusernonce"];
-            $nonceCheck = $hemUsers->validateNonce("newusernonce", $nonce);
-        }
-        if ( $nonceCheck ) {
+        $csrf = $hemUsers->validateToken();
+        if ( $csrf ) {
             if( isset($_POST["username"]) && !empty($_POST["username"]) || !empty($_POST["password"]) || !empty($_POST["email"]) ) {
                 if( empty($_POST["display_name"])) {
                     $display_name = $_POST["username"];
@@ -44,27 +38,23 @@ if ( isset($_GET["action"]) ) { // do we have an action?
                 $error = "You have to choose a username and a password and provide a valid email address";
             }
         } else {
-            $error = "nonce error.";
+            $error = "csrf motherfucker!!";
         }
     }
 } else { // no action means that we want to login
-    if (isset($_POST["loginnonce"])) {
-        $nonce = $_POST["loginnonce"];
-        $nonceCheck = $hemUsers->validateNonce("loginnonce", $nonce);
-
-        if ( $nonceCheck ) {
-            if (isset($_POST["username"])) {
-                $res = $hemUsers->loginUser($_POST["username"], $_POST["password"]);
-                if(!$res) {
-                    $error = "You supplied the wrong credentials.";
-                } else {
-                            header("Location: ../main.php");
-                            exit;
-                }
+    $csrf = $hemUsers->validateToken();
+    if ( $csrf ) {
+        if (isset($_POST["username"])) {
+            $res = $hemUsers->loginUser($_POST["username"], $_POST["password"]);
+            if(!$res) {
+                $error = "You supplied the wrong credentials.";
+            } else {
+                header("Location: ../main.php");
+                exit;
             }
-        } else {
-            $error = "error checking nonce at login time.";
         }
+    } else {
+        $error = "error checking nonce at login time.";
     }
 }
 
@@ -83,7 +73,7 @@ get_header();
         <?php if ( isset($_GET["action"]) ) {
             $action = $_GET["action"];
         }
-        if ( $action == "newuser" ) : 
+        if ( $action == "newuser" ) :
             $secret = $hemUsers->genToken( "newUser" ); ?>
 
             <form method="post" action="">
@@ -114,7 +104,8 @@ get_header();
 
             </form>
 
-        <?php else : ?>
+        <?php else : 
+            $secret = $hemUsers->genToken( "login" ); ?>
 
             <form method="post" action="">
                 <p>
@@ -127,7 +118,7 @@ get_header();
                     <input type="password" name="password" id="password" />
                 </p>
                 <p>
-                    <input type="hidden" name="loginnonce" value="<?php echo $hemUsers->generateNonce("loginnonce", 15); ?>">
+                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
                     <input type="submit" name="submit" value="Login" />
                 </p>
 

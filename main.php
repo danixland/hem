@@ -12,6 +12,7 @@
 	$hemUsers = new hemUsers();
 
 get_header();
+$secret = $hemUsers->genToken( "logout" );
 ?>
 	<body>
 
@@ -20,7 +21,7 @@ get_header();
 		<div>
 			<form action="admin/login.php?action=logout" method="post">
                 <p>
-                    <input type="hidden" name="logoutnonce" value="<?php echo $hemUsers->generateNonce("logoutnonce", 5); ?>">
+                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
                     <input type="submit" name="submit" value="logout" />
                 </p>
 			</form>

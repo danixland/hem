@@ -314,10 +314,10 @@
 		
 		public function validateToken()
 		{
-			$name = $_SESSION[$this->sessionName]["csrf_name"];
-			$token = $_SESSION[$this->sessionName]["csrf_token"];
-			unset($_SESSION[$this->sessionName]["csrf_token"]);
-			unset($_SESSION[$this->sessionName]["csrf_name"]);
+			$name = $_SESSION[$this->sessionName]["hem_csrf_name"];
+			$token = $_SESSION[$this->sessionName]["hem_csrf_token"];
+			unset($_SESSION[$this->sessionName]["hem_csrf_token"]);
+			unset($_SESSION[$this->sessionName]["hem_csrf_name"]);
 			
 			if($_POST[$name] == $token)
 				return true;
