@@ -63,7 +63,7 @@ if ( isset($_GET["action"]) ) { // do we have an action?
     }
 }
 
-ge_header();
+get_header();
 ?>
 
     <body>
