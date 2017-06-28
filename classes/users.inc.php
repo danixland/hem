@@ -406,7 +406,7 @@
 		 * @return string the generated Nonce.
 		 *
 		 */
-		public static function generateNonce($secret, $timeoutSeconds=180) {
+		public function generateNonce($secret, $timeoutSeconds=180) {
 			if (is_string($secret) == false || strlen($secret) < 10) {
 				throw new InvalidArgumentException("missing valid secret");
 			}
@@ -424,7 +424,7 @@
 		 * 
 		 * @returns bool whether the Nonce is valid.
 		 */
-		public static function validateNonce($secret, $nonce) {
+		public function validateNonce($secret, $nonce) {
 			if (is_string($nonce) == false) {
 				return false;
 			}
