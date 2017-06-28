@@ -78,7 +78,7 @@ get_header();
 
         <?php if ( isset($_GET["action"]) ) {
             $action = $_GET["action"];
-            if ( $action == "newuser" ) : ?>
+            if ( $action == "newuser" ) { ?>
 
                 <form method="post" action="">
                     <p>
@@ -108,7 +108,7 @@ get_header();
 
                 </form>
 
-            <?php else : ?>
+            <?php } else { ?>
 
             <form method="post" action="">
                 <p>
@@ -127,7 +127,7 @@ get_header();
 
             </form>
 
-            <?php endif; 
+            <?php }
 
         } ?>
 
