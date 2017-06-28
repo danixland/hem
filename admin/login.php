@@ -75,7 +75,10 @@ get_header();
         </p>
         <?php endif; ?>
 
-        <?php if ( $action == "newuser" ) : ?>
+        <?php if ( isset($_GET["action"]) ) {
+            $action = $_GET["action"];
+        }
+        if ( $action == "newuser" ) : ?>
 
             <form method="post" action="">
                 <p>
