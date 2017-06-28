@@ -43,6 +43,8 @@ if ( isset($_GET["action"]) ) { // do we have an action?
             } else {
                 $error = "You have to choose a username and a password and provide a valid email address";
             }
+        } else {
+            $error = "nonce error.";
         }
     }
 } else { // no action means that we want to login
@@ -60,6 +62,8 @@ if ( isset($_GET["action"]) ) { // do we have an action?
                             exit;
                 }
             }
+        } else {
+            $error = "error checking nonce at login time.";
         }
     }
 }
