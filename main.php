@@ -20,7 +20,7 @@ get_header();
 		<div>
 			<form action="admin/login.php?action=logout" method="post">
                 <p>
-                    <input type="hidden" name="logoutnonce" value="<?php echo $hemUsers->generateNonce("logoutnonce", 15); ?>">
+                    <input type="hidden" name="logoutnonce" value="<?php echo $hemUsers->generateNonce("logoutnonce", 5); ?>">
                     <input type="submit" name="submit" value="logout" />
                 </p>
 			</form>
