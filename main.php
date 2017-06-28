@@ -17,6 +17,15 @@ get_header();
 
 		<h1>Home Economy Manager</h1>
 
+		<div>
+			<form action="admin/login.php?action=logout" method="post">
+                <p>
+                    <input type="hidden" name="logoutnonce" value="<?php echo $hemUsers->generateNonce("logoutnonce", 15); ?>">
+                    <input type="submit" name="submit" value="logout" />
+                </p>
+			</form>
+		</div>
+
 		<p>
 			<?php
 			// This is a simple way of validating if a user is logged in or not.
