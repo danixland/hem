@@ -49,15 +49,16 @@ if ( isset($_GET["action"]) ) { // do we have an action?
     if (isset($_POST["loginnonce"])) {
         $nonce = $_POST["loginnonce"];
         $nonceCheck = $hemUsers->validateNonce("loginnonce", $nonce);
-    }
-    if ( $nonceCheck ) {
-        if (isset($_POST["username"])) {
-            $res = $hemUsers->loginUser($_POST["username"], $_POST["password"]);
-            if(!$res) {
-                $error = "You supplied the wrong credentials.";
-            } else {
-                        header("Location: ../main.php");
-                        exit;
+
+        if ( $nonceCheck ) {
+            if (isset($_POST["username"])) {
+                $res = $hemUsers->loginUser($_POST["username"], $_POST["password"]);
+                if(!$res) {
+                    $error = "You supplied the wrong credentials.";
+                } else {
+                            header("Location: ../main.php");
+                            exit;
+                }
             }
         }
     }
@@ -77,38 +78,37 @@ get_header();
 
         <?php if ( isset($_GET["action"]) ) {
             $action = $_GET["action"];
-        }
-        if ( $action == "newuser" ) : ?>
+            if ( $action == "newuser" ) : ?>
 
-            <form method="post" action="">
-                <p>
-                    <label for="username">Username:</label><br />
-                    <input type="text" name="username" id="username" />
-                </p>
+                <form method="post" action="">
+                    <p>
+                        <label for="username">Username:</label><br />
+                        <input type="text" name="username" id="username" />
+                    </p>
 
-                <p>
-                    <label for="password">Password:</label><br />
-                    <input type="password" name="password" id="password" />
-                </p>
+                    <p>
+                        <label for="password">Password:</label><br />
+                        <input type="password" name="password" id="password" />
+                    </p>
 
-                <p>
-                    <label for="email">email:</label><br />
-                    <input type="email" name="email" id="email" />
-                </p>
+                    <p>
+                        <label for="email">email:</label><br />
+                        <input type="email" name="email" id="email" />
+                    </p>
 
-                <p>
-                    <label for="display_name">display name:</label><br />
-                    <input type="text" name="display_name" id="display_name" />
-                </p>
+                    <p>
+                        <label for="display_name">display name:</label><br />
+                        <input type="text" name="display_name" id="display_name" />
+                    </p>
 
-                <p>
-                    <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 5); ?>">
-                    <input type="submit" name="submit" value="Register" />
-                </p>
+                    <p>
+                        <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 5); ?>">
+                        <input type="submit" name="submit" value="Register" />
+                    </p>
 
-            </form>
+                </form>
 
-        <?php else : ?>
+            <?php else : ?>
 
             <form method="post" action="">
                 <p>
@@ -127,7 +127,11 @@ get_header();
 
             </form>
 
-        <?php endif; ?>
+            <?php endif; 
+
+        } ?>
+
+
 
     </body>
 </html>
