@@ -107,7 +107,7 @@ get_header();
                 </p>
 
                 <p>
-                    <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 5); ?>">
+                    <input type="hidden" name="newusernonce" value="<?php echo $hemUsers->generateNonce("newusernonce", 15); ?>">
                     <input type="submit" name="submit" value="Register" />
                 </p>
 
@@ -126,7 +126,7 @@ get_header();
                     <input type="password" name="password" id="password" />
                 </p>
                 <p>
-                    <input type="hidden" name="loginnonce" value="<?php echo $hemUsers->generateNonce("loginnonce", 5); ?>">
+                    <input type="hidden" name="loginnonce" value="<?php echo $hemUsers->generateNonce("loginnonce", 15); ?>">
                     <input type="submit" name="submit" value="Login" />
                 </p>
 
