@@ -26,6 +26,12 @@ get_header();
 			</form>
 		</div>
 
+		<div>
+			<pre>
+				<?php print_r($_SESSIONS) ?>
+			</pre>
+		</div>
+
 		<p>
 			<?php
 			// This is a simple way of validating if a user is logged in or not.
