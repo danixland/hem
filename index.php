@@ -21,5 +21,9 @@ get_header();
 			<a href="admin/login.php">login</a>
 		</div>
 
+		<div>
+			<a href="admin/login.php?action=newuser">new user</a>
+		</div>
+
 	</body>
 </html>
