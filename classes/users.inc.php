@@ -410,7 +410,7 @@
 			if (is_string($secret) == false || strlen($secret) < 10) {
 				throw new InvalidArgumentException("missing valid secret");
 			}
-			$salt = this->_generateSalt();
+			$salt = $this->_generateSalt();
 			$time = time();
 			$maxTime = $time + $timeoutSeconds;
 			$nonce = $salt . "," . $maxTime . "," . sha1( $salt . $secret . $maxTime );
