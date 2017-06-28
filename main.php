@@ -28,7 +28,7 @@ get_header();
 
 		<div>
 			<pre>
-				<?php print_r($_SESSIONS) ?>
+				<?php print_r($_SESSION) ?>
 			</pre>
 		</div>
 
