@@ -106,28 +106,29 @@ get_header();
 
                 </form>
 
-            <?php else : 
-                $secret = $hemUsers->genToken( "login" ); ?>
+            <?php endif; ?>
 
-                <form method="post" action="">
-                    <p>
-                        <label for="username">Username:</label><br />
-                        <input type="text" name="username" id="username" />
-                    </p>
+        <?php } else {
+            $secret = $hemUsers->genToken( "login" ); ?>
 
-                    <p>
-                        <label for="password">Password:</label><br />
-                        <input type="password" name="password" id="password" />
-                    </p>
-                    <p>
-                        <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                        <input type="submit" name="submit" value="Login" />
-                    </p>
+            <form method="post" action="">
+                <p>
+                    <label for="username">Username:</label><br />
+                    <input type="text" name="username" id="username" />
+                </p>
 
-                </form>
+                <p>
+                    <label for="password">Password:</label><br />
+                    <input type="password" name="password" id="password" />
+                </p>
+                <p>
+                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
+                    <input type="submit" name="submit" value="Login" />
+                </p>
 
-            <?php endif; 
-        } ?>
+            </form>
+
+        <?php } ?>
 
 
 
