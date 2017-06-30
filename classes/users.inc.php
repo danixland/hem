@@ -389,59 +389,28 @@
 		}
 
 		/**
-		 * Generate a Nonce. 
-		 * 
-		 * The generated string contains three parts, seperated by a comma.
-		 * The first part is the individual salt. The seconds part is the 
-		 * time until the nonce is valid. The third part is a hash of the 
-		 * salt, the time, and a secret value.
-		 * 
-		 * @param $secret required String with at least 10 characters. The 
-		 * same value must be passed to check(). 
-		 * 
-		 * @param $timeoutSeconds the time in seconds until the nonce 
-		 * becomes invalid. 
+		 * Get either a Gravatar URL or complete image tag for a specified email address.
 		 *
-		 * @return string the generated Nonce.
-		 *
+		 * @param string $email The email address
+		 * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
+		 * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+		 * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
+		 * @param boole $img True to return a complete IMG tag False for just the URL
+		 * @param array $atts Optional, additional key/value attributes to include in the IMG tag
+		 * @return String containing either just a URL or a complete image tag
+		 * @source https://gravatar.com/site/implement/images/php/
 		 */
-		public function generateNonce($secret, $timeoutSeconds=180) {
-			if (is_string($secret) == false || strlen($secret) < 10) {
-				throw new InvalidArgumentException("missing valid secret");
+		public function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+			$url = 'https://www.gravatar.com/avatar/';
+			$url .= md5( strtolower( trim( $email ) ) );
+			$url .= "?s=$s&d=$d&r=$r";
+			if ( $img ) {
+				$url = '<img src="' . $url . '"';
+				foreach ( $atts as $key => $val )
+					$url .= ' ' . $key . '="' . $val . '"';
+				$url .= ' />';
 			}
-			$salt = $this->_generateSalt();
-			$time = time();
-			$maxTime = $time + $timeoutSeconds;
-			$nonce = $salt . "," . $maxTime . "," . sha1( $salt . $secret . $maxTime );
-			return $nonce;
-		}
-
-		/**
-		 * Check a previously generated Nonce.
-		 *
-		 * @param $secret the secret string passed to generate().
-		 * 
-		 * @returns bool whether the Nonce is valid.
-		 */
-		public function validateNonce($secret, $nonce) {
-			if (is_string($nonce) == false) {
-				return false;
-			}
-			$a = explode(',', $nonce);
-			if (count($a) != 3) {
-				return false;
-			}
-			$salt = $a[0];
-			$maxTime = intval($a[1]);
-			$hash = $a[2];
-			$back = sha1( $salt . $secret . $maxTime );
-			if ($back != $hash) {
-				return false;
-			}
-			if (time() > $maxTime) {
-				return false;
-			}
-			return true;
+			return $url;
 		}
 
 		/**

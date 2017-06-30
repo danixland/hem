@@ -25,11 +25,13 @@ if( !$user )
 	die("The user could not be found...");
 
 $secret = $hemUsers->genToken( "logout" );
+$gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x", false );
 ?>
 	<body>
 
 		<h1>Home Economy Manager</h1>
 
+		<img src="<?php echo $gravatar; ?>" alt="<?php echo $user['display_name']; ?>'s gravatar">
 		<h2>Hello <strong><?php echo $user["display_name"]; ?></strong></h2>
 
 		<div>
