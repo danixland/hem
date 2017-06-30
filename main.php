@@ -12,11 +12,25 @@
 	$hemUsers = new hemUsers();
 
 get_header();
+
+// This is a simple way of validating if a user is logged in or not.
+// If the user is logged in, the value is (bool)true - otherwise (bool)false.
+if( !$hemUsers->logged_in ) {
+	header("Location: admin/login.php");
+	exit;
+}
+
+$user = $hemUsers->getSingleUser();
+if( !$user )
+	die("The user could not be found...");
+
 $secret = $hemUsers->genToken( "logout" );
 ?>
 	<body>
 
 		<h1>Home Economy Manager</h1>
+
+		<h2>Hello <strong><?php echo $user["display_name"]; ?></strong></h2>
 
 		<div>
 			<form action="admin/login.php?action=logout" method="post">
@@ -33,21 +47,6 @@ $secret = $hemUsers->genToken( "logout" );
 			</pre>
 		</div>
 
-		<p>
-			<?php
-			// This is a simple way of validating if a user is logged in or not.
-			// If the user is logged in, the value is (bool)true - otherwise (bool)false.
-			if( !$hemUsers->logged_in ) {
-				header("Location: admin/login.php");
-				exit;
-			}
-
-			$user = $hemUsers->getSingleUser();
-			if( !$user )
-				die("The user could not be found...");
-
-			?>
-		</p>
 		<div>
 			<table>
 				<tr>
