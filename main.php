@@ -63,6 +63,7 @@ $secret = $hemUsers->genToken( "logout" );
 					<td><?php echo $user["user_email"]; ?></td>
 					<td><?php echo $user["user_registered"]; ?></td>
 					<td><?php echo $user["user_status"]; ?></td>
+					<td><?php echo $user["display_name"]; ?></td>
 				</tr>
 			</table>
 		</div>
