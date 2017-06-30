@@ -17,28 +17,28 @@ if ( isset($_GET["action"]) ) { // do we have an action?
             throw new Exception("Error Processing Request");
         }
     } elseif ($action == "newuser") { // if the action is "newuser"
-            if( isset($_POST["username"]) && !empty($_POST["username"]) || !empty($_POST["password"]) || !empty($_POST["email"]) ) {
-                if( empty($_POST["display_name"])) {
-                    $display_name = $_POST["username"];
-                } else {
-                    $display_name = $_POST["display_name"];
-                }
-                $csrf = $hemUsers->validateToken();
-                if ( $csrf ) {
-                    $res = $hemUsers->createUser($_POST["username"], $_POST["password"], $_POST["email"], $display_name);
+        if( isset($_POST["username"]) && !empty($_POST["username"]) || !empty($_POST["password"]) || !empty($_POST["email"]) ) {
+            if( empty($_POST["display_name"])) {
+                $display_name = $_POST["username"];
+            } else {
+                $display_name = $_POST["display_name"];
+            }
+            $csrf = $hemUsers->validateToken();
+            if ( $csrf ) {
+                $res = $hemUsers->createUser($_POST["username"], $_POST["password"], $_POST["email"], $display_name);
 
-                    if(!$res) {
-                        $error = "Username already taken.";
-                    } else {
-                        header("Location: ../main.php");
-                        exit;
-                    }
+                if(!$res) {
+                    $error = "Username already taken.";
                 } else {
-                    $error = "csrf motherfoca!!"
+                    header("Location: ../main.php");
+                    exit;
                 }
             } else {
-                $error = "You have to choose a username and a password and provide a valid email address";
+                $error = "csrf motherfoca!!";
             }
+        } else {
+            $error = "You have to choose a username and a password and provide a valid email address";
+        }
     }
 } else { // no action means that we want to login
 
@@ -55,6 +55,8 @@ if ( isset($_GET["action"]) ) { // do we have an action?
         } else {
             $error = "error with nonce at login.";
         }
+    } else {
+        $error = "you must provide a valid username and password to login.";
     }
 }
 
