@@ -18,12 +18,23 @@ get_header();
 		<h1>Home Economy Manager</h1>
 
 		<div>
-			<a href="admin/login.php">login</a>
+			<ul>
+				<li>
+					<a href="admin/login.php">login</a>
+				</li>
+				<li>
+					<a href="admin/login.php?action=newuser">new user</a>
+				</li>
+				<?php if ( $hemUsers->logged_in ) : ?>
+				<ul>
+					<li>
+						<a href="admin/transactions.php">transactions</a>
+					</li>
+				</ul>
+				<?php endif; ?>
+			</ul>
 		</div>
 
-		<div>
-			<a href="admin/login.php?action=newuser">new user</a>
-		</div>
 
 	</body>
 </html>
