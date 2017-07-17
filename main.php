@@ -36,8 +36,10 @@ $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x",
 			</form>
 		</div>
 		<div>
+			<p>what are you doing today?</p>
 			<ul>
 				<li><a href="transactions.php">transactions</a></li>
+				<li><a href="accounts.php">accounts</a></li>
 			</ul>
 		</div>
 

@@ -14,7 +14,7 @@
 
 	include($path."/config.php");
 	include($path."/classes/users.inc.php");
-//	include($path."/classes/data.inc.php");
+	include($path."/classes/data.inc.php");
 
 	require_once($path."/functions.php");
 
