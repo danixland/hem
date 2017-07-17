@@ -1,11 +1,4 @@
 <?php
-
-	/**
-	* Make sure you started your'e sessions!
-	* You need to include su.inc.php to make SimpleUsers Work
-	* After that, create an instance of SimpleUsers and your'e all set!
-	*/
-
 	session_start();
 	require_once(dirname(__FILE__)."/hem.inc.php");
 
@@ -28,7 +21,7 @@ get_header();
 				<?php if ( $hemUsers->logged_in ) : ?>
 				<ul>
 					<li>
-						<a href="admin/transactions.php">transactions</a>
+						<a href="transactions.php">transactions</a>
 					</li>
 				</ul>
 				<?php endif; ?>

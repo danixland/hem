@@ -1,11 +1,4 @@
 <?php
-
-	/**
-	* Make sure you started your'e sessions!
-	* You need to include su.inc.php to make SimpleUsers Work
-	* After that, create an instance of SimpleUsers and your'e all set!
-	*/
-
 	session_start();
 	require_once(dirname(__FILE__)."/hem.inc.php");
 
@@ -41,6 +34,11 @@ $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x",
                     <input type="submit" name="submit" value="logout" />
                 </p>
 			</form>
+		</div>
+		<div>
+			<ul>
+				<li><a href="transactions.php">transactions</a></li>
+			</ul>
 		</div>
 
 		<div>
