@@ -13,7 +13,12 @@ get_header();
             <h1>This is the Accounts page!</h1>
         </div>
         <div>
-            
+            <pre>
+                <?php
+                $accounts = $hemBanking->getAccounts();
+                print_r($accounts);
+                ?>
+            </pre>
         </div>
     </body>
 </html>
