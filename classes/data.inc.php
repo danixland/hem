@@ -29,15 +29,20 @@
 		*	@return	The account id or (bool)false
 		*/
 
-		public function createAccount( $name, $type ) {
+		public function createAccount( $name, $type, $aval_blnc, $count_blnc ) {
 
 			$userid = $_SESSION[$this->sessionName]["id"];
+			if ( $aval_blnc == NULL )
+				$aval_blnc = 0;
 
-			$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, 0, 0)";
+			if ( $count_blnc == NULL )
+				$count_blnc = 0;
+
+			$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("sss", $userid, $name, $type);
+			$this->stmt->bind_param("sssii", $userid, $name, $type, $aval_blnc, $count_blnc);
 			if( $this->stmt->execute() )
 				return $this->stmt->insert_id;
 				
