@@ -538,7 +538,7 @@
 			if ( $id == NULL )
 				$id = $udata["id"];
 
-			$sql = "SELECT * FROM accounts WHERE id=? ORDER BY id ASC";
+			$sql = "SELECT * FROM accounts WHERE owner=? ORDER BY id ASC";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
