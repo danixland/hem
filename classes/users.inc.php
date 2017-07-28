@@ -547,11 +547,11 @@
 			$this->stmt->store_result();
 
 			$accounts = array();
-			if( $this->stmt->num_rows > 0)
-			{
-				$this->stmt->bind_result($key, $value);
-				while( $this->stmt->fetch() )
-					$accounts[$key] = $value;
+			if( $this->stmt->num_rows > 0) {
+				$this->stmt->bind_result($accounts);
+//				$this->stmt->bind_result($key, $value);
+//				while( $this->stmt->fetch() )
+//					$accounts[$key] = $value;
 			}
 
 			return $accounts;
