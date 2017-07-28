@@ -50,6 +50,7 @@
             <h1>This is the Accounts page!</h1>
         </div>
         <div>
+            <h3>accounts list</h3>
             <pre>
                 <?php
                 $accounts = $hemUsers->getAccounts();
@@ -59,12 +60,14 @@
         </div>
 
         <div>
+            <h3>session</h3>
             <pre>
                 <?php print_r($_SESSION) ?>
             </pre>
         </div>
 
         <div>
+            <h3>userdata</h3>
             <pre>
                 <?php
                     $udata = $hemUsers->userdata;
