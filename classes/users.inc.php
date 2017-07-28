@@ -433,7 +433,132 @@
 			return substr($salt, 0, 128);
 		}
 
+		/**
+		* Returns a (int)account id, if the account was created succesfully.
+		* If not, it returns (bool)false.
+		*
+		*	@param	name		The name of the account
+		*	@param	type		The account type
+		*
+		*	@return	The account id or (bool)false
+		*/
+
+		public function createAccount( $name, $type, $aval_blnc, $count_blnc ) {
+
+			$udata = $hemUsers->userdata;
+			$userid = $udata["id"];
+			if ( $aval_blnc == NULL )
+				$aval_blnc = 0;
+
+			if ( $count_blnc == NULL )
+				$count_blnc = 0;
+
+			$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("sssii", $userid, $name, $type, $aval_blnc, $count_blnc);
+			if( $this->stmt->execute() )
+				return $this->stmt->insert_id;
+				
+			return false;
+		}
+
+		/**
+		* Retrieve one single bank account owned by the current user.
+		*
+		*	@param	name	The name of the account you want to retrieve
+		*	@param	id		Can be used if administrative control is needed
+		*	@return 		String with a given account value or (bool) false
+		*/
+
+		public function getAccount( $name, $id = null ) {
+
+			$udata = $hemUsers->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE id=? AND account_name=? LIMIT 1";
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("is", $id, $key);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0)
+				return "";
+
+			$this->stmt->bind_result($value);
+			$this->stmt->fetch();
+
+			return $value;
+		}
+
+		/**
+		* Use this function to permanently remove information attached to a certain user
+		* that has been set by using this objects setInfo() method.
+		*
+		*	@param	name	The name of the account you want to delete
+		*	@param	id		Can be used if administrative control is needed
+		*
+		*	@return			(bool) true on success or (bool) false otherwise
+		*/
+
+		public function deleteAccount( $name, $id = null ) {
+
+			$udata = $hemUsers->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "DELETE FROM accounts WHERE id=? AND account_name=? LIMIT 1";
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("is", $id, $name);
+			$this->stmt->execute();
+
+			if( $this->stmt->affected_rows > 0)
+				return true;
+
+			return false;
+		}
+
+
+		/**
+		* Use this function to retrieve all bank accounts attached to a certain user
+		*
+		*	@param		id	Can be used if administrative control is needed
+		* 	@return		An associative array with all stored information
+		*/
+
+		public function getAccounts( $id = null ) {
+
+			$udata = $hemUsers->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE id=? ORDER BY id ASC";
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("i", $id);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			$accounts = array();
+			if( $this->stmt->num_rows > 0)
+			{
+				$this->stmt->bind_result($key, $value);
+				while( $this->stmt->fetch() )
+					$accounts[$key] = $value;
+			}
+
+			return $accounts;
+		}
+
 
 	}
+
 
 ?>
