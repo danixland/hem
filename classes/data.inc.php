@@ -28,7 +28,7 @@
 
 		public function createAccount( $name, $type, $aval_blnc, $count_blnc ) {
 
-			$userid = $_SESSION[$hemUsers->$sessionName]["id"];
+			$userid = $hemUsers->userid;
 			if ( $aval_blnc == NULL )
 				$aval_blnc = 0;
 
@@ -57,7 +57,7 @@
 		public function getAccount( $name, $id = null ) {
 
 			if ( $id == NULL )
-				$id = $_SESSION[$hemUsers->$sessionName]["id"];
+				$id = $hemUsers->userid;
 
 			$sql = "SELECT * FROM accounts WHERE id=? AND account_name=? LIMIT 1";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
@@ -89,7 +89,7 @@
 		public function deleteAccount( $name, $id = null ) {
 
 			if( $id == null ) {
-				$id = $_SESSION[$hemUsers->$sessionName]["id"];
+				$id = $hemUsers->userid;
 			}
 
 			$sql = "DELETE FROM accounts WHERE id=? AND account_name=? LIMIT 1";
@@ -115,7 +115,7 @@
 
 		public function getAccounts( $id = null ) {
 			if( $id == null )
-				$id = $_SESSION[$hemUsers->$sessionName]["id"];
+				$id = $hemUsers->userid;
 
 			$sql = "SELECT * FROM accounts WHERE id=? ORDER BY id ASC";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
