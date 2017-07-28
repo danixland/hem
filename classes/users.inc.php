@@ -546,19 +546,24 @@
 			$this->stmt->execute();
 			$this->stmt->store_result();
 
-			$accounts = array();
-			$i = 0;
-			if( $this->stmt->num_rows > 0) {
-				$this->stmt->bind_result($id, $owner, $account_name, $account_type, $aval_balance, $counting_balance);
-				while( $this->stmt->fetch() )
-					$accounts[$i]["id"] = $id;
-					$accounts[$i]["owner"] = $owner;
-					$accounts[$i]["account_name"] = $account_name;
-					$accounts[$i]["account_type"] = $account_type;
-					$accounts[$i]["aval_balance"] = $aval_balance;
-					$accounts[$i]["counting_balance"] = $counting_balance;
+			if( $this->stmt->num_rows == 0 )
+				return array();
 
-					$i++;
+			$this->stmt->bind_result($id, $owner, $account_name, $account_type, $aval_balance, $counting_balance);
+
+			$accounts = array();
+
+			$i = 0;
+
+			while( $this->stmt->fetch() ) {
+				$accounts[$i]["id"] = $id;
+				$accounts[$i]["owner"] = $owner;
+				$accounts[$i]["account_name"] = $account_name;
+				$accounts[$i]["account_type"] = $account_type;
+				$accounts[$i]["aval_balance"] = $aval_balance;
+				$accounts[$i]["counting_balance"] = $counting_balance;
+
+				$i++;
 			}
 
 			return $accounts;
