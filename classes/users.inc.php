@@ -445,7 +445,7 @@
 
 		public function createAccount( $name, $type, $aval_blnc, $count_blnc ) {
 
-			$udata = $hemUsers->userdata;
+			$udata = $this->userdata;
 			$userid = $udata["id"];
 			if ( $aval_blnc == NULL )
 				$aval_blnc = 0;
@@ -474,7 +474,7 @@
 
 		public function getAccount( $name, $id = null ) {
 
-			$udata = $hemUsers->userdata;
+			$udata = $this->userdata;
 			if ( $id == NULL )
 				$id = $udata["id"];
 
@@ -507,7 +507,7 @@
 
 		public function deleteAccount( $name, $id = null ) {
 
-			$udata = $hemUsers->userdata;
+			$udata = $this->userdata;
 			if ( $id == NULL )
 				$id = $udata["id"];
 
@@ -534,7 +534,7 @@
 
 		public function getAccounts( $id = null ) {
 
-			$udata = $hemUsers->userdata;
+			$udata = $this->userdata;
 			if ( $id == NULL )
 				$id = $udata["id"];
 
