@@ -13,7 +13,7 @@
 	{
 
 		private $mysqli, $stmt;
-		private $sessionName = "hemUsers";
+		protected $sessionName = "hemUsers";
 		public $logged_in = false;
 		public $userdata;
 
