@@ -1,6 +1,8 @@
 <?php
 
 	class hemBanking extends hemUsers {
+		$hemUsers = new hemUsers();
+
 
 		/**
 		* Object construct verifies that a session has been started and that a MySQL connection can be established.
