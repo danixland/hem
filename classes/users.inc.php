@@ -9,13 +9,11 @@
 	* hemUsers is the class responsible of managing users inside hem
 	*/
 
-	class hemUsers
-	{
+	class hemUsers {
 
 		private $mysqli, $stmt;
 		protected $sessionName = "hemUsers";
 		public $logged_in = false;
-		public $userid = "";
 		public $userdata;
 
 		/**
@@ -97,7 +95,6 @@
 			$this->stmt->fetch();
 
 			$_SESSION[$this->sessionName]["id"] = $id;
-			$this->userid = $id;
 			$this->logged_in = true;
 
 			return $id;
@@ -150,7 +147,6 @@
 				unset($_SESSION[$this->sessionName]);
 
 			$this->logged_in = false;
-			$this->userid = "";
 		}
 
 		/**
