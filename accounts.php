@@ -60,6 +60,12 @@
 
         <div>
             <pre>
+                <?php print_r($_SESSION) ?>
+            </pre>
+        </div>
+
+        <div>
+            <pre>
                 <?php
                     $udata = $hemUsers->userdata;
                     echo $udata["id"] . " is the id of the current user";
