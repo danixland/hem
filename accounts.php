@@ -58,6 +58,13 @@
                 ?>
             </pre>
         </div>
+
+        <div>
+            <pre>
+                <?php print_r($hemUsers->userdata); ?>
+            </pre>
+        </div>
+
         <div>
             <h2>add new account</h2>
             <form method="post" action="">
