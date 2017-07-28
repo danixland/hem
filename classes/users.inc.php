@@ -548,9 +548,9 @@
 
 			$accounts = array();
 			if( $this->stmt->num_rows > 0) {
-				$result = $this->stmt->get_result();
-				while( $myrow = $result->fetch_assoc() )
-					$accounts[$key] = $value;
+				$this->stmt->bind_result($key, $value);
+				while( $this->stmt->fetch() )
+					$accounts[][$key] = $value;
 			}
 
 			return $accounts;
