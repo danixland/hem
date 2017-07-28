@@ -457,7 +457,7 @@
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("sssii", $userid, $name, $type, $aval_blnc, $count_blnc);
+			$this->stmt->bind_param("sssdd", $userid, $name, $type, $aval_blnc, $count_blnc);
 			if( $this->stmt->execute() )
 				return $this->stmt->insert_id;
 				
@@ -478,7 +478,7 @@
 			if ( $id == NULL )
 				$id = $udata["id"];
 
-			$sql = "SELECT * FROM accounts WHERE id=? AND account_name=? LIMIT 1";
+			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
@@ -505,17 +505,17 @@
 		*	@return			(bool) true on success or (bool) false otherwise
 		*/
 
-		public function deleteAccount( $name, $id = null ) {
+		public function deleteAccount( $accId, $id = null ) {
 
 			$udata = $this->userdata;
 			if ( $id == NULL )
 				$id = $udata["id"];
 
-			$sql = "DELETE FROM accounts WHERE id=? AND account_name=? LIMIT 1";
+			$sql = "DELETE FROM accounts WHERE owner=? AND id=? LIMIT 1";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("is", $id, $name);
+			$this->stmt->bind_param("ii", $id, $accId);
 			$this->stmt->execute();
 
 			if( $this->stmt->affected_rows > 0)
