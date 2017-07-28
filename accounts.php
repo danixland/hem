@@ -30,7 +30,7 @@
         $csrf = $hemUsers->validateToken();
 
         if( $csrf ) {
-            $res = $hemBanking->createAccount($acc_name, $acc_type, $aval_blnc, $count_blnc);
+            $res = $hemUsers->createAccount($acc_name, $acc_type, $aval_blnc, $count_blnc);
             if(!$res) {
                 $error = "Error creating account.";
             } else {
@@ -52,7 +52,7 @@
         <div>
             <pre>
                 <?php
-                $accounts = $hemBanking->getAccounts();
+                $accounts = $hemUsers->getAccounts();
                 print_r($accounts);
                 ?>
             </pre>
