@@ -1,7 +1,7 @@
 <?php
 
 	class hemBanking extends hemUsers {
-		$hemUsers = new hemUsers();
+		$hemUsers = hemUsers();
 
 
 		/**
