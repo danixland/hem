@@ -61,7 +61,10 @@
 
         <div>
             <pre>
-                <?php print_r($hemUsers->userdata); ?>
+                <?php
+                    $udata = $hemUsers->userdata;
+                    echo $udata["id"] . " is the id of the current user";
+                ?>
             </pre>
         </div>
 
