@@ -50,6 +50,12 @@ $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x",
 		</div>
 
 		<div>
+			<pre>
+				<?php print_r($hemUsers->userdata); ?>
+			</pre>
+		</div>
+
+		<div>
 			<table>
 				<tr>
 					<td>ID</td>
