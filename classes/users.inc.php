@@ -577,8 +577,6 @@
 		}
 
 
-	}
-
 		/**
 		* Check if an account owned by the user with the same name exists
 		*
@@ -638,4 +636,5 @@
 			}
 		}
 
+	}
 ?>
