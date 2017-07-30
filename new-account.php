@@ -34,7 +34,7 @@
             if(!$res) {
                 $error = "Error creating account.";
             } else {
-                header("Location: " . $_SERVER['PHP_SELF']);
+                header("Location: accounts.php");
                 exit;
             }
         } else {

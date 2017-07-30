@@ -23,6 +23,9 @@ get_header();
 					<li>
 						<a href="transactions.php">transactions</a>
 					</li>
+					<li>
+						<a href="accounts.php">accounts</a>
+					</li>
 				</ul>
 				<?php endif; ?>
 			</ul>

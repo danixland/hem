@@ -12,6 +12,14 @@
             <h1>This is the Accounts page!</h1>
         </div>
         <div>
+            <h2>Add new account</h2>
+            <ul>
+                <li>
+                    <a href="new-account.php">new account</a>
+                </li>
+            </ul>
+        </div>
+        <div>
             <h3>accounts list</h3>
             <pre>
                 <?php
