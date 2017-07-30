@@ -64,6 +64,11 @@
                 </p>
 
                 <p>
+                    <label for="main_account">Main Account?</label><br />
+                    <input type="checkbox" name="main_account" id="main_account">
+                </p>
+
+                <p>
                     <label for="account_type">Account Type:</label><br />
                     <input type="text" name="account_type" id="account_type" />
                 </p>

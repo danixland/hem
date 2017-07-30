@@ -436,36 +436,6 @@
 		}
 
 		/**
-		* Check if an account owned by the user with the same name exists
-		*
-		*	@param	name	The name of the account you want to check
-		*	@param	id		Can be used if administrative control is needed
-		*	@return 		(bool) true if account exists or (bool) false otherwise
-		*/
-
-		private function _account_exists( $name, $id = null) {
-
-			$udata = $this->userdata;
-			if ( $id == NULL )
-				$id = $udata["id"];
-
-			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
-
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
-
-			$this->stmt->bind_param("is", $id, $name);
-			$this->stmt->execute();
-			$this->stmt->store_result();
-
-			if( $this->stmt->num_rows == 0) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		/**
 		* Returns a (int)account id, if the account was created succesfully.
 		* If not, it returns (bool)false.
 		*
@@ -502,7 +472,7 @@
 		}
 
 		/**
-		* Retrieve one single bank account owned by the current user.
+		* Retrieve one single bank account by name owned by the current user.
 		*
 		*	@param	name	The name of the account you want to retrieve
 		*	@param	id		Can be used if administrative control is needed
@@ -609,5 +579,63 @@
 
 	}
 
+		/**
+		* Check if an account owned by the user with the same name exists
+		*
+		*	@param	name	The name of the account you want to check
+		*	@param	id		Can be used if administrative control is needed
+		*	@return 		(bool) true if account exists or (bool) false otherwise
+		*/
+
+		private function _account_exists( $name, $id = null) {
+
+			$udata = $this->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
+
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("is", $id, $name);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		/**
+		* Check if a user has a main account
+		*
+		*	@param	id		Can be used if administrative control is needed
+		*	@return 		(bool) true if user has main account or (bool) false otherwise
+		*/
+
+		private function _user_has_main_account( $id = null) {
+
+			$udata = $this->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE owner=? AND main_account=1 LIMIT 1";
+
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("i", $id);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 
 ?>
