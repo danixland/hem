@@ -15,6 +15,10 @@
             $acc_type = $_POST["account_type"];
         }
 
+        if ( $_POST["main_account"] ) {
+            $main = true;
+        }
+
         if (empty($_POST["aval_balance"])) {
             $aval_blnc = 0;
         } else {
@@ -31,7 +35,7 @@
 
         if( $csrf ) {
             try {
-                $res = $hemUsers->createAccount($acc_name, $acc_type, $aval_blnc, $count_blnc);
+                $res = $hemUsers->createAccount($acc_name, $acc_type, $main, $aval_blnc, $count_blnc);
             } catch (Exception $e) {
                 header("Location: error.php?errorMsg=" . urlencode($e->getMessage()));
             }

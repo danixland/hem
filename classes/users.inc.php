@@ -445,7 +445,7 @@
 		*	@return	The account id or (bool)false
 		*/
 
-		public function createAccount( $name, $type, $aval_blnc, $count_blnc ) {
+		public function createAccount( $name, $type, $main, $aval_blnc, $count_blnc ) {
 
 			$udata = $this->userdata;
 			$userid = $udata["id"];
@@ -455,12 +455,14 @@
 			if ( $count_blnc == NULL )
 				$count_blnc = 0;
 
+			$main_acc = ( $main ) ? 1 : 0;
+
 			if ( ! $this->_account_exists($name, $userid) ) {
-				$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
+				$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?, ?)";
 				if( !$this->stmt = $this->mysqli->prepare($sql) )
 					throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-				$this->stmt->bind_param("sssdd", $userid, $name, $type, $aval_blnc, $count_blnc);
+				$this->stmt->bind_param("issidd", $userid, $name, $type, $main_acc, $aval_blnc, $count_blnc);
 				if( $this->stmt->execute() ) {
 					return $this->stmt->insert_id;
 				} else {
