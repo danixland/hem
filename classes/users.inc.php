@@ -422,8 +422,7 @@
 		* @return String with 128 characters
 		*/
 
-		private function _generateSalt( $lenght = null )
-		{
+		private function _generateSalt( $lenght = null ) {
 			$salt = null;
 
 			if ( !$lenght ) {
@@ -434,6 +433,36 @@
 				$salt = $salt.uniqid(null, true);
 
 			return substr($salt, 0, 128);
+		}
+
+		/**
+		* Check if an account owned by the user with the same name exists
+		*
+		*	@param	name	The name of the account you want to check
+		*	@param	id		Can be used if administrative control is needed
+		*	@return 		(bool) true if account exists or (bool) false otherwise
+		*/
+
+		private function _account_exists( $name, $id = null) {
+
+			$udata = $this->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
+
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("is", $id, $name);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		/**
@@ -469,36 +498,6 @@
 				}
 			} else {
 				throw new Exception("Account \"" . $name .  "\" already exists");
-			}
-		}
-
-		/**
-		* Check if an account owned by the user with the same name exists
-		*
-		*	@param	name	The name of the account you want to check
-		*	@param	id		Can be used if administrative control is needed
-		*	@return 		(bool) true if account exists or (bool) false otherwise
-		*/
-
-		private function _account_exists( $name, $id = null) {
-
-			$udata = $this->userdata;
-			if ( $id == NULL )
-				$id = $udata["id"];
-
-			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
-
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
-
-			$this->stmt->bind_param("is", $id, $name);
-			$this->stmt->execute();
-			$this->stmt->store_result();
-
-			if( $this->stmt->num_rows == 0) {
-				return false;
-			} else {
-				return true;
 			}
 		}
 
