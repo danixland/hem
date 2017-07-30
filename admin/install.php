@@ -46,26 +46,19 @@
 	$tables["accounts"] = "CREATE TABLE IF NOT EXISTS `accounts` (
   `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `owner` bigint(11) UNSIGNED NOT NULL,
-  `iban` varchar(27) NOT NULL,
-  `aval_balance` numeric(15,2) NOT NULL,
-  `counting_balance` numeric(15,2) NOT NULL,
+  `account_name` varchar(255) NOT NULL,
   `account_type` int(11) NOT NULL,
-  `bank` bigint(11) UNSIGNED NOT NULL,
+  `aval_balance` decimal(15,2) NOT NULL,
+  `counting_balance` decimal(15,2) NOT NULL,
   PRIMARY KEY `id` (`id`),
-  UNIQUE KEY `iban` (`iban`)
+  UNIQUE KEY `account_name` (`account_name`)
 	) ENGINE=MyISAM;";
 
-	$tables["banks"] = "CREATE TABLE IF NOT EXISTS `banks` (
+	$tables["account_types"] = "CREATE TABLE IF NOT EXISTS `account_types` (
   `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `bank_name` varchar(255) NOT NULL,
-  `abi` int(5) NOT NULL,
-  `cab` int(5) NOT NULL,
-  `cin` varchar(1) NOT NULL,
-  `notes` text NOT NULL,
+  `name` varchar(200) NOT NULL,
   PRIMARY KEY `id` (`id`),
-  UNIQUE KEY `bank_name` (`bank_name`),
-  UNIQUE KEY `abi` (`abi`),
-  UNIQUE KEY `cab` (`cab`)
+  UNIQUE KEY `name` (`name`),
 	) ENGINE=MyISAM;";
 
 get_header();
