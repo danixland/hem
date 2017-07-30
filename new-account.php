@@ -65,7 +65,7 @@
 
                 <p>
                     <label for="main_account">Main Account?</label><br />
-                    <input type="checkbox" name="main_account" id="main_account">
+                    <input type="checkbox" name="main_account" id="main_account" <?php ( $hemUsers->user_has_main_account()) ? echo "disabled" : continue; ?>>
                 </p>
 
                 <p>
