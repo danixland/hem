@@ -38,6 +38,7 @@
   `activation_key` varchar(255) NOT NULL,
   `user_status` int(11) NOT NULL,
   `display_name` varchar(250) NOT NULL,
+  `accounts` bigint(11) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `user_login` (`user_login`),
   UNIQUE KEY `user_email` (`user_email`)
@@ -48,6 +49,7 @@
   `owner` bigint(11) UNSIGNED NOT NULL,
   `account_name` varchar(255) NOT NULL,
   `account_type` int(11) NOT NULL,
+  `main_account` int(1) NOT NULL,
   `aval_balance` decimal(15,2) NOT NULL,
   `counting_balance` decimal(15,2) NOT NULL,
   PRIMARY KEY `id` (`id`),

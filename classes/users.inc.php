@@ -55,12 +55,13 @@
 			$password = $salt.$password;
 			$activation_key = md5($salt.$email);
 			$status = intval(1); # 1 is a simple user. 10 is admin
-			# id, user_login, user_pass, salt, user_email, user_registered, activation_key, user_status, display_name
-			$sql = "INSERT INTO users VALUES (NULL, ?, SHA1(?), ?, ?, NOW(), ?, ?, ?)";
+			$accounts = intval(0); # there are no accounts yet when you create your user
+			# id, user_login, user_pass, salt, user_email, user_registered, activation_key, user_status, display_name, accounts
+			$sql = "INSERT INTO users VALUES (NULL, ?, SHA1(?), ?, ?, NOW(), ?, ?, ?, ?)";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("sssssis", $username, $password, $salt, $email, $activation_key, $status, $display_name);
+			$this->stmt->bind_param("sssssisi", $username, $password, $salt, $email, $activation_key, $status, $display_name, $accounts);
 			if( $this->stmt->execute() )
 				return $this->stmt->insert_id;
 				
@@ -183,7 +184,7 @@
 		public function getUsers()
 		{
 			
-			$sql = "SELECT DISTINCT id, user_login, user_email, user_registered, user_status, display_name FROM users ORDER BY user_login ASC";
+			$sql = "SELECT DISTINCT id, user_login, user_email, user_registered, user_status, display_name, accounts FROM users ORDER BY user_login ASC";
 
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
@@ -207,6 +208,7 @@
 				$users[$i]["user_registered"] = $created;
 				$users[$i]["user_status"] = $status;
 				$users[$i]["display_name"] = $display_name;
+				$users[$i]["accounts"] = $accounts;
 
 				$i++;
 			}
@@ -228,7 +230,7 @@
 			if( $id == null )
 				$id = $_SESSION[$this->sessionName]["id"];
 
-			$sql = "SELECT id, user_login, user_email, user_registered, user_status, display_name FROM users WHERE id=? LIMIT 1";
+			$sql = "SELECT id, user_login, user_email, user_registered, user_status, display_name, accounts FROM users WHERE id=? LIMIT 1";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
@@ -239,7 +241,7 @@
 			if( $this->stmt->num_rows == 0)
 				return false;
 
-			$this->stmt->bind_result($id, $username, $email, $created, $status, $display_name);
+			$this->stmt->bind_result($id, $username, $email, $created, $status, $display_name, $accounts);
 			$this->stmt->fetch();
 
 			$user["id"] = $id;
@@ -248,6 +250,7 @@
 			$user["user_registered"] = $created;
 			$user["user_status"] = $status;
 			$user["display_name"] = $display_name;
+			$user["accounts"] = $accounts;
 
 			return $user;
 
@@ -453,15 +456,50 @@
 			if ( $count_blnc == NULL )
 				$count_blnc = 0;
 
-			$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
+			if ( ! _account_exists($name, $userid) ) {
+				$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
+				if( !$this->stmt = $this->mysqli->prepare($sql) )
+					throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+				$this->stmt->bind_param("sssdd", $userid, $name, $type, $aval_blnc, $count_blnc);
+				if( $this->stmt->execute() ) {
+					return $this->stmt->insert_id;
+				} else {
+					return false;
+				}
+			} else {
+				throw new Exception("Account \"" . $name .  "\" already exists");
+			}
+		}
+
+		/**
+		* Check if an account owned by the user with the same name exists
+		*
+		*	@param	name	The name of the account you want to check
+		*	@param	id		Can be used if administrative control is needed
+		*	@return 		(bool) true if account exists or (bool) false otherwise
+		*/
+
+		private function _account_exists( $name, $id = null) {
+
+			$udata = $this->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$sql = "SELECT * FROM accounts WHERE owner=? AND account_name=? LIMIT 1";
+
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("sssdd", $userid, $name, $type, $aval_blnc, $count_blnc);
-			if( $this->stmt->execute() )
-				return $this->stmt->insert_id;
-				
-			return false;
+			$this->stmt->bind_param("is", $id, $name);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		/**
@@ -482,7 +520,7 @@
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-			$this->stmt->bind_param("is", $id, $key);
+			$this->stmt->bind_param("is", $id, $name);
 			$this->stmt->execute();
 			$this->stmt->store_result();
 
@@ -496,8 +534,8 @@
 		}
 
 		/**
-		* Use this function to permanently remove information attached to a certain user
-		* that has been set by using this objects setInfo() method.
+		* Use this function to permanently remove an account owned by the user. An optional id
+		* can be passed as argument to this function for an admin to operate on another user account.
 		*
 		*	@param	name	The name of the account you want to delete
 		*	@param	id		Can be used if administrative control is needed
