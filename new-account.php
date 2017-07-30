@@ -33,7 +33,7 @@
             try {
                 $res = $hemUsers->createAccount($acc_name, $acc_type, $aval_blnc, $count_blnc);
             } catch (Exception $e) {
-                echo "Caught Exception: " . $e->getMessage() . ".";
+                header("Location: error.php?errorMsg=" . urlencode($e->getMessage()));
             }
             if(!$res) {
                 $error = "Error creating account.";
