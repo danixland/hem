@@ -485,7 +485,7 @@
 			if ( $count_blnc == NULL )
 				$count_blnc = 0;
 
-			if ( ! _account_exists($name, $userid) ) {
+			if ( ! $this->_account_exists($name, $userid) ) {
 				$sql = "INSERT INTO accounts VALUES (NULL, ?, ?, ?, ?, ?)";
 				if( !$this->stmt = $this->mysqli->prepare($sql) )
 					throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
