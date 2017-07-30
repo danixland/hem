@@ -614,7 +614,7 @@
 		*	@return 		(bool) true if user has main account or (bool) false otherwise
 		*/
 
-		private function _user_has_main_account( $id = null) {
+		public function user_has_main_account( $id = null) {
 
 			$udata = $this->userdata;
 			if ( $id == NULL )
