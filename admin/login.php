@@ -5,9 +5,6 @@ require_once(dirname(__FILE__)."/../hem.inc.php");
 
 $hemUsers = new hemUsers();
 
-# check if the user is currently logged in, if so redirect to main.php
-if ( $hemUsers->logged_in )
-    header("Location: ../main.php");
 
 if ( isset($_GET["action"]) ) { // do we have an action?
     $action = $_GET["action"];
@@ -45,6 +42,10 @@ if ( isset($_GET["action"]) ) { // do we have an action?
         }
     }
 } else { // no action means that we want to login
+
+    # in case of login check if the user is currently logged in, if so redirect to main.php
+    if ( $hemUsers->logged_in )
+        header("Location: ../main.php");
 
     if (isset($_POST["username"])) {
         $csrf = $hemUsers->validateToken();
