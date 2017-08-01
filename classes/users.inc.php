@@ -195,7 +195,7 @@
 			if( $this->stmt->num_rows == 0)
 				return array();
 
-			$this->stmt->bind_result($id, $username, $email, $created, $status, $display_name);
+			$this->stmt->bind_result($id, $username, $email, $created, $status, $display_name, $accounts);
 
 			$users = array();
 
@@ -569,6 +569,7 @@
 				$accounts[$i]["owner"] = $owner;
 				$accounts[$i]["account_name"] = $account_name;
 				$accounts[$i]["account_type"] = $account_type;
+				$accounts[$i]["main_account"] = $main_account;
 				$accounts[$i]["aval_balance"] = $aval_balance;
 				$accounts[$i]["counting_balance"] = $counting_balance;
 
