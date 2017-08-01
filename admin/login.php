@@ -5,6 +5,10 @@ require_once(dirname(__FILE__)."/../hem.inc.php");
 
 $hemUsers = new hemUsers();
 
+# check if the user is currently logged in, if so redirect to main.php
+if ( $hemUsers->logged_in )
+    header("Location: ../main.php");
+
 if ( isset($_GET["action"]) ) { // do we have an action?
     $action = $_GET["action"];
     if ($action == "logout") { // if the action is "logout"
@@ -28,7 +32,7 @@ if ( isset($_GET["action"]) ) { // do we have an action?
                 $res = $hemUsers->createUser($_POST["username"], $_POST["password"], $_POST["email"], $display_name);
 
                 if(!$res) {
-                    $error = "Username already taken.";
+                    $error = "User or Password already exists.";
                 } else {
                     header("Location: ../main.php");
                     exit;

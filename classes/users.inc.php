@@ -56,6 +56,7 @@
 			$activation_key = md5($salt.$email);
 			$status = intval(1); # 1 is a simple user. 10 is admin
 			$accounts = intval(0); # there are no accounts yet when you create your user
+
 			# id, user_login, user_pass, salt, user_email, user_registered, activation_key, user_status, display_name, accounts
 			$sql = "INSERT INTO users VALUES (NULL, ?, SHA1(?), ?, ?, NOW(), ?, ?, ?, ?)";
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
@@ -152,7 +153,7 @@
 
 		/**
 		* Update the users password with this function.
-		* Generates a new salt and a sets the users password with the given parameter
+		* Generates a new salt and sets the users password with the given parameter
 		*
 		* @param	password	The new password
 		* @param	id	Can be used if administrative control is needed
@@ -433,6 +434,34 @@
 				$salt = $salt.uniqid(null, true);
 
 			return substr($salt, 0, 128);
+		}
+
+		/**
+		* Check if a username or email already exists in the database
+		* it returns (bool) true or false.
+		*
+		*	@param	name		The name of the account
+		*	@param	email		The email for the account
+		*
+		*	@return	(bool)true or (bool)false
+		*/
+		private function _email_or_name_exists($name = null, $email = null) {
+			$option = ( $name == null ) ? "user_email" : "user_login";
+			$value = ( $name == null ) ? $email : $name;
+			$sql = "SELECT * FROM users WHERE ?=? LIMIT 1";
+
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+			$this->stmt->bind_param("ss", $option, $value);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		/**
