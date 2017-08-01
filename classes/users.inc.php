@@ -437,34 +437,6 @@
 		}
 
 		/**
-		* Check if a username or email already exists in the database
-		* it returns (bool) true or false.
-		*
-		*	@param	name		The name of the account
-		*	@param	email		The email for the account
-		*
-		*	@return	(bool)true or (bool)false
-		*/
-		private function _email_or_name_exists($name = null, $email = null) {
-			$option = ( $name == null ) ? "user_email" : "user_login";
-			$value = ( $name == null ) ? $email : $name;
-			$sql = "SELECT * FROM users WHERE ?=? LIMIT 1";
-
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
-
-			$this->stmt->bind_param("ss", $option, $value);
-			$this->stmt->execute();
-			$this->stmt->store_result();
-
-			if( $this->stmt->num_rows == 0) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		/**
 		* Returns a (int)account id, if the account was created succesfully.
 		* If not, it returns (bool)false.
 		*
