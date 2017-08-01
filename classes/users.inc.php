@@ -558,7 +558,7 @@
 			if( $this->stmt->num_rows == 0 )
 				return array();
 
-			$this->stmt->bind_result($id, $owner, $account_name, $account_type, $aval_balance, $counting_balance);
+			$this->stmt->bind_result($id, $owner, $account_name, $account_type, $main_account, $aval_balance, $counting_balance);
 
 			$accounts = array();
 
