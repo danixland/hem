@@ -52,8 +52,7 @@
   `main_account` int(1) NOT NULL,
   `aval_balance` decimal(15,2) NOT NULL,
   `counting_balance` decimal(15,2) NOT NULL,
-  PRIMARY KEY `id` (`id`),
-  UNIQUE KEY `account_name` (`account_name`)
+  PRIMARY KEY `id` (`id`)
 	) ENGINE=MyISAM;";
 
 	$tables["account_types"] = "CREATE TABLE IF NOT EXISTS `account_types` (

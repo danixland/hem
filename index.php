@@ -31,6 +31,13 @@ get_header();
 			</ul>
 		</div>
 
+		<?php $install_file = "admin/install.php";
+		if ( file_exists($install_file) ) : ?>
+		<div>
+			<h2>CAREFUL, THE FILE INSTALL.PHP IS STILL AVAILABLE!!</h2>
+			<p>in a production environment it is advised to remove or rename the file install.php in order to avoid wiping the database by mistake.</p>
+		</div>
+		<?php endif; ?>
 
 	</body>
 </html>
