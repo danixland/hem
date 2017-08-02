@@ -60,11 +60,11 @@
 
         <div>
             <h2>add new account</h2>
-            <form method="post" action="">
+            <form method="post" action="" id="new-account">
                 <?php $secret = $hemUsers->genToken( "newAccount" ); ?>
                 <p>
                     <label for="account_name">Account Name:</label><br />
-                    <input type="text" name="account_name" id="account_name" />
+                    <input type="text" name="account_name" id="account_name" placeholder="Account Name:" />
                 </p>
 
                 <p>
@@ -74,17 +74,17 @@
 
                 <p>
                     <label for="account_type">Account Type:</label><br />
-                    <input type="text" name="account_type" id="account_type" />
+                    <input type="text" name="account_type" id="account_type" placeholder="Account Type:" />
                 </p>
 
                 <p>
                     <label for="aval_balance">Available Balance:</label><br />
-                    <input type="number" min="0" max="999999999999" step="0.01" name="aval_balance" id="aval_balance" />
+                    <input type="number" min="0" max="999999999999" step="0.01" name="aval_balance" id="aval_balance" placeholder="Available Balance:" />
                 </p>
 
                 <p>
                     <label for="count_balance">Counting Balance:</label><br />
-                    <input type="number" min="0" max="999999999999" step="0.01" name="count_balance" id="count_balance" />
+                    <input type="number" min="0" max="999999999999" step="0.01" name="count_balance" id="count_balance" placeholder="Counting Balance:" />
                 </p>
 
                 <p>
