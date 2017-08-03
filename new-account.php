@@ -15,9 +15,7 @@
             $acc_type = $_POST["account_type"];
         }
 
-        if ( $_POST["main_account"] ) {
-            $main = true;
-        }
+        $main = ( isset($_POST["main_account"]) ) ? true : false;
 
         if (empty($_POST["aval_balance"])) {
             $aval_blnc = 0;
