@@ -464,7 +464,8 @@
 					throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
 				$this->stmt->bind_param("issidd", $userid, $name, $type, $main_acc, $aval_blnc, $count_blnc);
-				if( $this->stmt->execute() && $this->update_account_count() ) {
+				if( $this->stmt->execute() ) {
+					$this->update_account_count($userid);
 					return $this->stmt->insert_id;
 				} else {
 					return false;
