@@ -58,6 +58,10 @@
             <h1>This is the Accounts page!</h1>
         </div>
 
+        <?php if( $error ) : ?>
+            <p><?php echo $error; ?></p>
+        <?php endif; ?>
+
         <div>
             <h2>add new account</h2>
             <form method="post" action="" id="new-account">
