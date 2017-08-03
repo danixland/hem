@@ -464,7 +464,7 @@
 					throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
 				$this->stmt->bind_param("issidd", $userid, $name, $type, $main_acc, $aval_blnc, $count_blnc);
-				if( $this->stmt->execute() ) {
+				if( $this->stmt->execute() && $this->update_account_count() ) {
 					return $this->stmt->insert_id;
 				} else {
 					return false;
@@ -630,6 +630,36 @@
 				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
 			$this->stmt->bind_param("i", $id);
+			$this->stmt->execute();
+			$this->stmt->store_result();
+
+			if( $this->stmt->num_rows == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		/**
+		* Update the accounts count for a defined user.
+		*
+		*	@param	id		Can be used if administrative control is needed
+		*/
+
+		public function update_account_count( $id = null) {
+
+			$udata = $this->userdata;
+			if ( $id == NULL )
+				$id = $udata["id"];
+
+			$acc_nmbr = $udata["accounts"];
+			$acc_nmbr++;
+			$sql = "UPDATE users SET accounts=? WHERE id=? LIMIT 1";
+			if( !$this->stmt = $this->mysqli->prepare($sql) )
+				throw new Exception("MySQL Prepare statement failed: " . $this->mysqli->error);
+
+			$this->stmt->bind_param("ii", $acc_nmbr, $userid);
+
 			$this->stmt->execute();
 			$this->stmt->store_result();
 
