@@ -1,7 +1,7 @@
 <?php
 function get_header() {
     $path = dirname(__FILE__);
-    require($path . "/../header.php");
+    require($path . "/header.php");
 }
 
 function the_title( $custom_title = null ) {
