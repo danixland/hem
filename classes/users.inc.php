@@ -466,7 +466,8 @@
 				$this->stmt->bind_param("issidd", $userid, $name, $type, $main_acc, $aval_blnc, $count_blnc);
 				if( $this->stmt->execute() ) {
 					$this->update_account_count($userid); # l'errore è qui!!
-					return $this->stmt->insert_id;
+#					return $this->stmt->insert_id;
+					return true;
 				} else {
 					return false;
 				}
