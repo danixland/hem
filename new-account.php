@@ -56,7 +56,7 @@
             <h1>This is the Accounts page!</h1>
         </div>
 
-        <?php if( $error ) : ?>
+        <?php if( isset($error) ) : ?>
             <p><?php echo $error; ?></p>
         <?php endif; ?>
 
