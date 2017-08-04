@@ -34,14 +34,14 @@
         if( $csrf ) {
             try {
                 $res = $hemUsers->createAccount($acc_name, $acc_type, $main, $aval_blnc, $count_blnc);
+                if(!$res) {
+                    $error = "Error creating account.";
+                } else {
+                    header("Location: accounts.php");
+                    exit;
+                }
             } catch (Exception $e) {
                 header("Location: error.php?errorMsg=" . urlencode($e->getMessage()));
-            }
-            if(!$res) {
-                $error = "Error creating account.";
-            } else {
-                header("Location: accounts.php");
-                exit;
             }
         } else {
             $error = "csrf motherfoca!!";
