@@ -465,7 +465,7 @@
 
 				$this->stmt->bind_param("issidd", $userid, $name, $type, $main_acc, $aval_blnc, $count_blnc);
 				if( $this->stmt->execute() ) {
-					$this->update_account_count($userid);
+					$this->update_account_count($userid); # l'errore è qui!!
 					return $this->stmt->insert_id;
 				} else {
 					return false;
@@ -647,7 +647,7 @@
 		*	@param	id		Can be used if administrative control is needed
 		*/
 
-		public function update_account_count( $id = null) {
+		public function update_account_count( $id = null ) {
 
 			$udata = $this->userdata;
 			if ( $id == NULL )
@@ -659,15 +659,12 @@
 			if( !$this->stmt = $this->mysqli->prepare($sql) )
 				throw new Exception("MySQL Prepare statement failed: " . $this->mysqli->error);
 
-			$this->stmt->bind_param("ii", $acc_nmbr, $userid);
+			$this->stmt->bind_param("ii", $acc_nmbr, $id);
 
-			$this->stmt->execute();
-			$this->stmt->store_result();
-
-			if( $this->stmt->num_rows == 0) {
-				return false;
-			} else {
+			if( $this->stmt->execute() ) {
 				return true;
+			} else {
+				return false;
 			}
 		}
 
