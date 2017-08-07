@@ -5,11 +5,10 @@ function get_header() {
 }
 
 function the_title( $custom_title = null ) {
-    $title = "Home Economy Manager";
-    if ( $custom_title )
-        $title .= " - " . $custom_title;
+    $site_title = "Home Economy Manager";
+    $title = ( isset($custom_title) ) ? $custom_title . " | " . $site_title : $site_title;
 
-    echo $title;
+    return $title;
 }
 
 ?>

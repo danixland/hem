@@ -48,6 +48,7 @@
         }
     }
 
+    $custom_title = "create new account";
 
     get_header();
 ?>
