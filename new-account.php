@@ -70,10 +70,12 @@
                     <input type="text" name="account_name" id="account_name" placeholder="Account Name:" />
                 </p>
 
+                <?php if( ! $hemUsers->user_has_main_account() ) : ?>
                 <p>
                     <label for="main_account">Main Account?</label><br />
-                    <input type="checkbox" name="main_account" id="main_account" <?php echo ( $hemUsers->user_has_main_account()) ? "disabled" : "checked"; ?>>
+                    <input type="checkbox" name="main_account" id="main_account" checked >
                 </p>
+                <?php endif; ?>
 
                 <p>
                     <label for="account_type">Account Type:</label><br />
