@@ -8,5 +8,5 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <title><?php echo the_title( $custom_title ); ?></title>
+        <title><?php echo $custom_title; ?></title>
     </head>

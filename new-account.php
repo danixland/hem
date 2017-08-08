@@ -50,7 +50,7 @@
 
     $custom_title = "create new account";
 
-    get_header();
+    get_header($custom_title);
 ?>
     <body>
         <div>
