@@ -5,7 +5,7 @@ function get_header( $pagetitle = null ) {
     require($path . "/header.php");
 }
 
-function the_title( $custom_title = null ) {
+function the_title( $custom_title ) {
     $site_title = "Home Economy Manager";
     $title = ( isset($custom_title) ) ? $custom_title . " | " . $site_title : $site_title;
 
