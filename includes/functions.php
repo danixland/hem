@@ -1,6 +1,7 @@
 <?php
-function get_header() {
+function get_header( $pagetitle ) {
     $path = dirname(__FILE__);
+    $custom_title = ( isset($pagetitle) ) ? $pagetitle : "";
     include($path . "/header.php");
 }
 

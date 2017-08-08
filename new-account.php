@@ -48,10 +48,10 @@
         }
     }
 
-    $custom_title = "create new account";
+    $pagetitle = "create new account";
 
 #    include(dirname(__FILE__) . "/includes/header.php");
-    get_header();
+    get_header($pagetitle);
 ?>
     <body>
         <div>
