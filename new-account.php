@@ -50,7 +50,7 @@
 
     $custom_title = "create new account";
 
-    get_header($custom_title);
+    include(dirname(__FILE__) . "/includes/header.php");
 ?>
     <body>
         <div>
