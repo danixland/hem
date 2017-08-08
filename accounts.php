@@ -5,46 +5,60 @@
 
     $hemUsers = new hemUsers();
 
-    get_header();
+    $pagetitle = "Your Accounts";
+
+    get_header($pagetitle);
 ?>
     <body>
-        <div>
+        <header>
             <h1>This is the Accounts page!</h1>
-        </div>
-        <div>
-            <h2>Add new account</h2>
-            <ul>
-                <li>
-                    <a href="new-account.php">new account</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h3>accounts list</h3>
-            <pre>
-                <?php
-                $accounts = $hemUsers->getAccounts();
-                print_r($accounts);
-                ?>
-            </pre>
-        </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="new-account.php">new account</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <article>
+                <header>
+                    <h3>accounts list</h3>
+                </header><!-- /header -->
+                <div>
+                    <pre>
+                        <?php
+                        $accounts = $hemUsers->getAccounts();
+                        print_r($accounts);
+                        ?>
+                    </pre>
+                </div>
+            </article>
 
-        <div>
-            <h3>session</h3>
-            <pre>
-                <?php print_r($_SESSION) ?>
-            </pre>
-        </div>
+            <article>
+                <header>
+                    <h3>session</h3>
+                </header><!-- /header -->
+                <div>
+                    <pre>
+                        <?php print_r($_SESSION) ?>
+                    </pre>
+                </div>
+            </article>
 
-        <div>
-            <h3>userdata</h3>
-            <pre>
-                <?php
-                    $udata = $hemUsers->userdata;
-                    print_r($udata);
-                ?>
-            </pre>
-        </div>
+            <article>
+                <header>
+                    <h3>userdata</h3>
+                </header><!-- /header -->
+                <div>
+                    <pre>
+                        <?php
+                            $udata = $hemUsers->userdata;
+                            print_r($udata);
+                        ?>
+                    </pre>
+                </div>
+            </article>
+        </section>
 
-    </body>
-</html>
+<?php get_footer(); ?>
