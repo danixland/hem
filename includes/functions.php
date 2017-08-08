@@ -1,8 +1,7 @@
 <?php
-function get_header( $pagetitle = null ) {
-    $custom_title = ( isset($pagetitle) ) ? $pagetitle : null;
+function get_header() {
     $path = dirname(__FILE__);
-    require($path . "/header.php");
+    include($path . "/header.php");
 }
 
 function the_title( $custom_title ) {
