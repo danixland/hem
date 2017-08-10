@@ -4,7 +4,9 @@
 
 	$hemUsers = new hemUsers();
 
-get_header();
+$pagetitle = "main page";
+
+get_header($pagetitle);
 
 // This is a simple way of validating if a user is logged in or not.
 // If the user is logged in, the value is (bool)true - otherwise (bool)false.
