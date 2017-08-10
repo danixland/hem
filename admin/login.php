@@ -69,9 +69,9 @@ if( isset($_GET["action"]) ) {
     $action = $_GET["action"];
     if( $action == "newuser" ) {
         $pagetitle == "Create new user";
-    } else {
-        $pagetitle = "Login";
     }
+} else {
+    $pagetitle = "login";
 }
 
 get_header($pagetitle);
