@@ -3,6 +3,7 @@
 	require_once(dirname(__FILE__)."/hem.inc.php");
 
 	$hemUsers = new hemUsers();
+	$hemBanking = new hemBanking();
 
 $pagetitle = "main page";
 
@@ -89,7 +90,7 @@ $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x",
 
 		<div>
 			<h2>testing ID</h2>
-			<p>id for the current user is: <?php echo hemUsers::$id; ?></p>
+			<p>id for the current user is: <?php echo $hemBanking->echoing(); ?></p>
 		</div>
 
 	</body>
