@@ -19,7 +19,7 @@ class hemBanking {
 	}
 
 	public function echoing() {
-		return hemUsers::$id;
+		return hemUsers::$userid;
 	}
 
 }

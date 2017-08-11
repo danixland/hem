@@ -15,7 +15,7 @@
 		protected $sessionName = "hemUsers";
 		public $logged_in = false;
 		public $userdata;
-		public static $id;
+		public static $userid;
 
 		/**
 		* Object construct verifies that a session has been started and that a MySQL connection can be established.
@@ -99,7 +99,7 @@
 
 			$_SESSION[$this->sessionName]["id"] = $id;
 			$this->logged_in = true;
-			$this->$id = $id;
+			self::$userid = $id;
 
 			return $id;
 		}
