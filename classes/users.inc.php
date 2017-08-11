@@ -99,7 +99,7 @@
 
 			$_SESSION[$this->sessionName]["id"] = $id;
 			$this->logged_in = true;
-			$this->$userid = $id;
+			self::$userid = $id;
 
 			return $id;
 		}
