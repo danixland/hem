@@ -19,5 +19,5 @@ define(ACCOUNT_TYPES, array(
 	'credit card' => 1,
 	'prepaid card' => 2
 	)
-;)
+);
 ?>
