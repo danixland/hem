@@ -3,9 +3,9 @@
 class hemBanking extends hemUsers {
 
 	public function echoing() {
-		$data = parent::getID();
+		$userid = parent::getID();
 
-		return $data["id"];
+		return $userid;
 	}
 
 }

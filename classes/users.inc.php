@@ -339,7 +339,7 @@
 			if( !$this->_validateid() )
 				return;
 
-			return $this->userdata;
+			return $this->userdata["id"];
 		}
 
 		/**
