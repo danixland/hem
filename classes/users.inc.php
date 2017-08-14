@@ -14,8 +14,7 @@
 		private $mysqli, $stmt;
 		protected $sessionName = "hemUsers";
 		public $logged_in = false;
-		public $userdata;
-		public static $userid = 0;
+		public static $userdata;
 
 		/**
 		* Object construct verifies that a session has been started and that a MySQL connection can be established.
@@ -99,7 +98,6 @@
 
 			$_SESSION[$this->sessionName]["id"] = $id;
 			$this->logged_in = true;
-			$this->userid = $id;
 
 			return $id;
 		}
@@ -377,7 +375,7 @@
 		* quick access as an object.
 		*
 		* @return void
-		*/	
+		*/
 		
 		private function _populateUserdata()
 		{
