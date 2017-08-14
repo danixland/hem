@@ -216,6 +216,7 @@ class hemBanking extends hemUsers {
 
 	public function update_account_count( $id = null ) {
 
+		$udata = $this->userdata;
 		if ( $id == NULL )
 			$id = parent::getID();
 
