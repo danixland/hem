@@ -329,6 +329,21 @@
 		}
 
 		/**
+		* Return the user id for the current session
+		*/
+
+		public function getID()
+		{
+			if( !isset($_SESSION[$this->sessionName]["id"]) )
+				return;
+
+			if( !$this->_validateid() )
+				return;
+
+			return $this->userdata["8"];
+		}
+
+		/**
 		* Validates if the user is logged in or not.
 		* This is a void function.
 		*/
