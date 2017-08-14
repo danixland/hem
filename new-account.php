@@ -87,7 +87,7 @@
                     <p>
                         <label for="account_type">Account Type:</label><br />
                         <select name="account_type" id="account_type" required >
-                        <?php foreach ($account_types as $name => $value) : ?>
+                        <?php foreach ($hem_conf["account_types"] as $name => $value) : ?>
                             <option value="<?php echo $value; ?>"><?php echo $name; ?></option>
                          <?php endforeach; ?>
                         </select>
