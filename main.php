@@ -90,7 +90,7 @@ $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x",
 
 		<div>
 			<h2>testing ID</h2>
-			<pre><?php $idd = $hemBanking->echoing();
+			<pre><?php $idd = $hemUsers->getID();
 			var_dump( $idd ); ?></pre>
 		</div>
 

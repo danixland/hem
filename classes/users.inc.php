@@ -332,15 +332,14 @@
 		* Return the user id for the current session
 		*/
 
-		public function getID()
-		{
+		public function getID() {
 			if( !isset($_SESSION[$this->sessionName]["id"]) )
 				return;
 
 			if( !$this->_validateid() )
 				return;
 
-			return $this->userdata["id"];
+			return $this->userdata;
 		}
 
 		/**
