@@ -29,7 +29,7 @@
 			if( strlen($sessionId) == 0)
 				throw new Exception("No session has been started.\n<br />Please add `session_start();` initially in your file before any output.");
 
-			$this->mysqli = new mysqli($hem_conf["mysql_hostname"], $hem_conf["mysql_username"], $hem_conf["mysql_password"], $hem_conf["mysql_database"]);
+			$this->mysqli = new mysqli($mysql_hostname, $mysql_username, $mysql_password, $mysql_database);
 			if( $this->mysqli->connect_error )
 				throw new Exception("MySQL connection could not be established: ".$this->mysqli->connect_error);
 

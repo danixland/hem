@@ -1,20 +1,23 @@
 <?php
 
-	/**
-	* Configuration file
-	*/
+/**
+* Configuration file
+*/
 
-return array(
-	// Fill up your database details
-	"mysql_hostname"	=> "localhost",
-	"mysql_username"	=> "test",
-	"mysql_password"	=> "test",
-	"mysql_database"	=> "test",
-	// Add other account types in this array here if you want to support more than the standard ones
-	"account_types"		=> array(
-		"bank"				=> 0,
-		"credit card"		=> 1,
-		"prepaid card"		=> 2
+
+/**
+* Please provide your MySQL login information below.
+*/
+define($mysql_hostname, "localhost");
+define($mysql_username, "test");
+define($mysql_password, "test");
+define($mysql_database, "test");
+
+
+define($account_types, array(
+	'bank' => 0,
+	'credit card' => 1,
+	'prepaid card' => 2
 	)
-);
+;)
 ?>
