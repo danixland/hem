@@ -19,7 +19,7 @@ class hemBanking extends hemUsers {
 	}
 
 	public function echoing() {
-		return $this->userid;
+		return parent::$userid;
 	}
 
 }
