@@ -4,6 +4,7 @@
     require_once(dirname(__FILE__)."/hem.inc.php");
 
     $hemUsers = new hemUsers();
+    $hemBanking = new hemBanking();
 
     $pagetitle = "Your Accounts";
 
@@ -28,7 +29,7 @@
                 <div>
                     <pre>
                         <?php
-                        $accounts = $hemUsers->getAccounts();
+                        $accounts = $hemBanking->getAccounts();
                         print_r($accounts);
                         ?>
                     </pre>

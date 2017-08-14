@@ -4,6 +4,7 @@
     require_once(dirname(__FILE__)."/hem.inc.php");
 
     $hemUsers = new hemUsers();
+    $hemBanking = new hemBanking();
 
     if ( isset($_POST["account_name"]) && !empty($_POST["account_name"]) ) {
 
@@ -33,7 +34,7 @@
 
         if( $csrf ) {
             try {
-                $res = $hemUsers->createAccount($acc_name, $acc_type, $main, $aval_blnc, $count_blnc);
+                $res = $hemBanking->createAccount($acc_name, $acc_type, $main, $aval_blnc, $count_blnc);
                 if(!$res) {
                     $error = "Error creating account.";
                 } else {
@@ -76,7 +77,7 @@
                         <input type="text" name="account_name" id="account_name" placeholder="Account Name:" />
                     </p>
 
-                    <?php if( ! $hemUsers->user_has_main_account() ) : ?>
+                    <?php if( ! $hemBanking->user_has_main_account() ) : ?>
                     <p>
                         <label for="main_account">Main Account?</label><br />
                         <input type="checkbox" name="main_account" id="main_account" checked >
