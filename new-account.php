@@ -74,7 +74,7 @@
                     <?php $secret = $hemUsers->genToken( "newAccount" ); ?>
                     <p>
                         <label for="account_name">Account Name:</label><br />
-                        <input type="text" name="account_name" id="account_name" placeholder="Account Name:" />
+                        <input type="text" name="account_name" id="account_name" placeholder="Account Name:" required />
                     </p>
 
                     <?php if( ! $hemBanking->user_has_main_account() ) : ?>
@@ -86,7 +86,11 @@
 
                     <p>
                         <label for="account_type">Account Type:</label><br />
-                        <input type="text" name="account_type" id="account_type" placeholder="Account Type:" />
+                        <select name="account_type" id="account_type" required >
+                        <?php foreach ($account_types as $name => $value) : ?>
+                            <option value="<?php echo $value; ?>"><?php echo $name; ?></option>
+                         <?php endforeach; ?>
+                        </select>
                     </p>
 
                     <p>

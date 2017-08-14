@@ -3,7 +3,6 @@
 	/**
 	* Configuration file
 	*
-	* This should be the only file you need to edit in, regarding the original script.
 	* Please provide your MySQL login information below.
 	*/
 
@@ -13,4 +12,9 @@
 	$GLOBALS["mysql_database"] = "test";
 
 
+	$account_types = array(
+		'bank' => 0,
+		'credit card' => 1,
+		'prepaid card' => 2
+	);
 ?>
