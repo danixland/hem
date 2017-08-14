@@ -119,17 +119,17 @@ class hemBanking extends hemUsers {
 			$id = parent::getID();
 
 		$sql = "SELECT * FROM accounts WHERE owner=? ORDER BY id ASC";
-		if( !$hemUsers->$stmt = $hemUsers->$mysqli->prepare($sql) )
+		if( !parent::$stmt = parent::$mysqli->prepare($sql) )
 			throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
 
-		$hemUsers->$stmt->bind_param("i", $id);
-		$hemUsers->$stmt->execute();
-		$hemUsers->$stmt->store_result();
+		parent::$stmt->bind_param("i", $id);
+		parent::$stmt->execute();
+		parent::$stmt->store_result();
 
-		if( $hemUsers->$stmt->num_rows == 0 )
+		if( parent::$stmt->num_rows == 0 )
 			return array();
 
-		$hemUsers->$stmt->bind_result($id, $owner, $account_name, $account_type, $main_account, $aval_balance, $counting_balance);
+		parent::$stmt->bind_result($id, $owner, $account_name, $account_type, $main_account, $aval_balance, $counting_balance);
 
 		$accounts = array();
 

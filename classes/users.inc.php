@@ -11,7 +11,7 @@
 
 	class hemUsers {
 
-		protected $mysqli, $stmt;
+		protected static $mysqli, $stmt;
 		protected $sessionName = "hemUsers";
 		public $logged_in = false;
 		public $userdata;
