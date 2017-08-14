@@ -10,7 +10,7 @@ return array(
 	"mysql_username"	=> "test",
 	"mysql_password"	=> "test",
 	"mysql_database"	=> "test",
-	// Add here if you want to support other account types
+	// Add other account types in this array here if you want to support more than the standard ones
 	"account_types"		=> array(
 		"bank"				=> 0,
 		"credit card"		=> 1,
