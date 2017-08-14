@@ -1,8 +1,8 @@
 <?php
 
-class hemBanking {
+class hemBanking extends hemUsers {
 
-	private $mysqli, $stmt;
+	private $bank_mysqli, $bank_stmt;
 
 	/**
 	* Object construct verifies that a session has been started and that a MySQL connection can be established.
@@ -12,14 +12,14 @@ class hemBanking {
 	*/
 
 	public function __construct() {
-		$this->mysqli = new mysqli($GLOBALS["mysql_hostname"], $GLOBALS["mysql_username"], $GLOBALS["mysql_password"], $GLOBALS["mysql_database"]);
-		if( $this->mysqli->connect_error )
-			throw new Exception("MySQL connection could not be established: ".$this->mysqli->connect_error);
+		$this->bank_mysqli = new mysqli($GLOBALS["mysql_hostname"], $GLOBALS["mysql_username"], $GLOBALS["mysql_password"], $GLOBALS["mysql_database"]);
+		if( $this->bank_mysqli->connect_error )
+			throw new Exception("MySQL connection could not be established: ".$this->bank_mysqli->connect_error);
 
 	}
 
 	public function echoing() {
-		return hemUsers::$userid;
+		return $this->$userid;
 	}
 
 }
