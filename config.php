@@ -8,13 +8,13 @@
 /**
 * Please provide your MySQL login information below.
 */
-define($mysql_hostname, "localhost");
-define($mysql_username, "test");
-define($mysql_password, "test");
-define($mysql_database, "test");
+define(DB_HOST, "localhost");
+define(DB_USER, "test");
+define(DB_PASS, "test");
+define(DB_NAME, "test");
 
 
-define($account_types, array(
+define(ACCOUNT_TYPES, array(
 	'bank' => 0,
 	'credit card' => 1,
 	'prepaid card' => 2
