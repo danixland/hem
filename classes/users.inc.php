@@ -15,7 +15,7 @@
 		protected $sessionName = "hemUsers";
 		public $logged_in = false;
 		public $userdata;
-		public static $userid = null;
+		public static $userid = 0;
 
 		/**
 		* Object construct verifies that a session has been started and that a MySQL connection can be established.
