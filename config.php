@@ -20,4 +20,17 @@ define("ACCOUNT_TYPES", serialize(array(
 	'prepaid card' => 2
 	))
 );
+
+/**
+ * Here are defined the pages that shouldn't be available if a user is not logged in.
+ * DO NOT MODIFY THIS ARRAY UNLESS YOU KNOW WHAT YOU'RE DOING!
+ */
+define("RESTRICTED_PAGES", serialize(array(
+    "main",
+    "accounts",
+    "new-account",
+    "transactions",
+    "new-transaction"
+    ))
+);
 ?>

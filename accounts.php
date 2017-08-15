@@ -10,9 +10,7 @@
 
     get_header($pagetitle);
 ?>
-    <body>
-        <header>
-            <h1><?php echo $pagetitle; ?></h1>
+        <section>
             <nav>
                 <ul>
                     <li>
@@ -20,8 +18,7 @@
                     </li>
                 </ul>
             </nav>
-        </header>
-        <section>
+
             <article>
                 <header>
                     <h3>accounts list</h3>

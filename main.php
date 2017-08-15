@@ -8,91 +8,65 @@
 $pagetitle = "main page";
 
 get_header($pagetitle);
-
-// This is a simple way of validating if a user is logged in or not.
-// If the user is logged in, the value is (bool)true - otherwise (bool)false.
-if( !$hemUsers->logged_in ) {
-	header("Location: admin/login.php");
-	exit;
-}
-
-$user = $hemUsers->getSingleUser();
-if( !$user )
-	die("The user could not be found...");
-
-$secret = $hemUsers->genToken( "logout" );
-$gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x", false );
 ?>
-	<body>
 
-		<h1>Home Economy Manager</h1>
+		<section>
+			<article>
+				<p>what are you doing today?</p>
+				<ul>
+					<li><a href="transactions.php">transactions</a></li>
+					<li><a href="accounts.php">accounts</a></li>
+				</ul>
+			</article>
 
-		<img src="<?php echo $gravatar; ?>" alt="<?php echo $user['display_name']; ?>'s gravatar">
-		<h2>Hello <strong><?php echo $user["display_name"]; ?></strong></h2>
+			<article>
+				<pre>
+					<?php print_r($_SESSION) ?>
+				</pre>
+			</article>
 
-		<div>
-			<form action="admin/login.php?action=logout" method="post">
-                <p>
-                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                    <input type="submit" name="submit" value="logout" />
-                </p>
-			</form>
-		</div>
-		<div>
-			<p>what are you doing today?</p>
-			<ul>
-				<li><a href="transactions.php">transactions</a></li>
-				<li><a href="accounts.php">accounts</a></li>
-			</ul>
-		</div>
+			<article>
+				<pre>
+					<?php print_r($hemUsers->userdata); ?>
+				</pre>
+			</article>
 
-		<div>
-			<pre>
-				<?php print_r($_SESSION) ?>
-			</pre>
-		</div>
+			<article>
+				<table>
+					<tr>
+						<td>ID</td>
+						<td>login</td>
+						<td>email</td>
+						<td>reg. date</td>
+						<td>status</td>
+						<td>display name</td>
+					</tr>
+					<tr>
+						<td><?php echo $user["id"]; ?></td>
+						<td><?php echo $user["user_login"]; ?></td>
+						<td><?php echo $user["user_email"]; ?></td>
+						<td><?php echo $user["user_registered"]; ?></td>
+						<td><?php echo $user["user_status"]; ?></td>
+						<td><?php echo $user["display_name"]; ?></td>
+					</tr>
+				</table>
+			</article>
 
-		<div>
-			<pre>
-				<?php print_r($hemUsers->userdata); ?>
-			</pre>
-		</div>
+			<article>
+				<pre>
+					<?php
+					$users = $hemUsers->getUsers();
+					print_r($users);
+					?>
+				</pre>
+			</article>
 
-		<div>
-			<table>
-				<tr>
-					<td>ID</td>
-					<td>login</td>
-					<td>email</td>
-					<td>reg. date</td>
-					<td>status</td>
-					<td>display name</td>
-				</tr>
-				<tr>
-					<td><?php echo $user["id"]; ?></td>
-					<td><?php echo $user["user_login"]; ?></td>
-					<td><?php echo $user["user_email"]; ?></td>
-					<td><?php echo $user["user_registered"]; ?></td>
-					<td><?php echo $user["user_status"]; ?></td>
-					<td><?php echo $user["display_name"]; ?></td>
-				</tr>
-			</table>
-		</div>
+			<article>
+				<h2>testing ID</h2>
+				<pre><?php $idd = $hemBanking->echoing();
+				var_dump( $idd ); ?></pre>
+			</article>
 
-		<div>
-			<pre>
-				<?php
-				$users = $hemUsers->getUsers();
-				print_r($users);
-				?>
-			</pre>
-		</div>
+		</section>
 
-		<div>
-			<h2>testing ID</h2>
-			<pre><?php $idd = $hemBanking->echoing();
-			var_dump( $idd ); ?></pre>
-		</div>
-
-	</body>
-</html>
+<?php get_footer(); ?>
