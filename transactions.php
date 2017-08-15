@@ -1,5 +1,11 @@
 <?php
 
+    session_start();
+    require_once(dirname(__FILE__)."/hem.inc.php");
+
+    $hemUsers = new hemUsers();
+    $hemBanking = new hemBanking();
+
     $pagetitle = "Your Transactions";
 
     get_header($pagetitle);

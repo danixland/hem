@@ -1,5 +1,11 @@
 <?php
 
+    session_start();
+    require_once(dirname(__FILE__)."/hem.inc.php");
+
+    $hemUsers = new hemUsers();
+    $hemBanking = new hemBanking();
+
     if ( isset($_POST["account_name"]) && !empty($_POST["account_name"]) ) {
 
         $acc_name = $_POST["account_name"];
