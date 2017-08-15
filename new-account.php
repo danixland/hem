@@ -55,7 +55,7 @@
 ?>
     <body>
         <header>
-            <h1>This is the Accounts page!</h1>
+            <h1><?php echo $pagetitle; ?></h1>
         </header>
 
         <section>
