@@ -14,10 +14,10 @@ define("DB_PASS", "test");
 define("DB_NAME", "test");
 
 
-define("ACCOUNT_TYPES", array(
+define("ACCOUNT_TYPES", serialize(array(
 	'bank' => 0,
 	'credit card' => 1,
 	'prepaid card' => 2
-	)
+	))
 );
 ?>
