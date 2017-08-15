@@ -1,10 +1,4 @@
 <?php 
-    session_start();
-    require_once(dirname(__FILE__)."/hem.inc.php");
-
-    $hemUsers = new hemUsers();
-
-
     $pagetitle = "Ooops, something went wrong!";
 
     get_header($pagetitle);

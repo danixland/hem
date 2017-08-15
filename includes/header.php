@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    require_once(dirname(__FILE__)."/hem.inc.php");
+
+    $hemUsers = new hemUsers();
+    $hemBanking = new hemBanking();
+
 if( is_restricted() && !$hemUsers->logged_in ) {
     header("Location: admin/login.php");
     exit;
