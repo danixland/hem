@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . "/../hem.inc.php");
 
 $hemUsers = new hemUsers();
 
-if ( !is_restricted() ) {
+if ( is_restricted() ) {
     if ( !$hemUsers->logged_in ) {
         header("Location: admin/login.php");
         exit;
