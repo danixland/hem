@@ -16,7 +16,7 @@ if ( is_restricted() ) {
         }
     }
 } else {
-    header("Location: login.php");
+    header("Location: admin/login.php");
 }
 
 ?>
