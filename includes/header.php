@@ -47,4 +47,4 @@ $hemUsers = new hemUsers();
             </form>
         </header>
 
-        <article><strong><?php is_restricted(); ?></strong></article>
+        <article><strong><?php echo is_restricted(); ?></strong></article>
