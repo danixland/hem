@@ -5,7 +5,11 @@ $hemUsers = new hemUsers();
 
 if ( is_restricted() ) {
     if ( !$hemUsers->logged_in ) {
-        header("Location: ../admin/login.php");
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $login = 'admin/login.php';
+
+        header("Location: https://$host$uri/$login");
         exit;
     } else {
         $user = $hemUsers->getSingleUser();

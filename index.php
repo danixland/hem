@@ -10,19 +10,6 @@
     get_header($pagetitle);
 ?>
 		<section>
-			<article>
-				<pre>
-					<?php
-$host  = $_SERVER['HTTP_HOST'];
-$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-$extra = 'mypage.php';
-
-echo "host = " . $host;
-echo "uri = " . $uri;
-echo "extra = " . $extra;
-?>
-				</pre>
-			</article>
             <nav>
                 <ul>
 					<li>
