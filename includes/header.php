@@ -5,7 +5,7 @@ $hemUsers = new hemUsers();
 
 if ( is_restricted() ) {
     if ( !$hemUsers->logged_in ) {
-        header("Location: login.php");
+        header("Location: admin/login.php");
         exit;
     } else {
         $user = $hemUsers->getSingleUser();
@@ -16,7 +16,7 @@ if ( is_restricted() ) {
         }
     }
 } else {
-    header("Location: admin/login.php");
+    header("Location: login.php");
 }
 
 ?>
