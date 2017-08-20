@@ -48,3 +48,7 @@ if ( is_restricted() ) {
                 </p>
             </form>
         </header>
+
+        <pre>
+            <?php echo basename($_SERVER["REQUEST_URI"]); ?>
+        </pre>
