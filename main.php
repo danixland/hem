@@ -32,6 +32,7 @@ get_header($pagetitle);
 			</article>
 
 			<article>
+			<?php $user = $hemUsers->getSingleUser(); ?>
 				<table>
 					<tr>
 						<td>ID</td>
