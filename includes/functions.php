@@ -20,8 +20,7 @@ function the_title( $custom_title ) {
 function is_restricted($page = null) {
     $current_page = ( ! $page ) ? basename($_SERVER["REQUEST_URI"]) : $page;
     foreach (unserialize(RESTRICTED_PAGES) as $res_page) {
-//        return ( $current_page == $res_page . ".php") ? true : false;
-        return basename($_SERVER["REQUEST_URI"]);
+        return ( $current_page == $res_page . ".php") ? true : false;
     }
 }
 ?>
