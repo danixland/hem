@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . "/../hem.inc.php");
 
 $hemUsers = new hemUsers();
 
-if ( is_restricted() ) {
+/*if ( is_restricted() ) {
     if ( !$hemUsers->logged_in ) {
         header("Location: login.php");
         exit;
@@ -18,7 +18,7 @@ if ( is_restricted() ) {
 } else {
     header("Location: admin/login.php");
 }
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -47,3 +47,4 @@ if ( is_restricted() ) {
             </form>
         </header>
 
+        <article><strong><?php is_restricted(); ?></strong></article>
