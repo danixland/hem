@@ -50,7 +50,3 @@ if ( is_restricted() ) {
             </form>
             <?php endif; ?>
         </header>
-
-        <pre>
-            <?php echo basename($_SERVER["REQUEST_URI"]); ?>
-        </pre>
