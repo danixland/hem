@@ -77,19 +77,53 @@ if( isset($_GET["action"]) ) {
 get_header($pagetitle);
 ?>
 
-    <body>
-        <h1>Login/Logout/newuser</h1>
+        <section>
+            <?php if( isset($error) ): ?>
+            <article>
+                <p>
+                    <?php echo $error; ?>
+                </p>
+            </article>
+            <?php endif; ?>
 
-        <?php if( isset($error) ): ?>
-        <p>
-            <?php echo $error; ?>
-        </p>
-        <?php endif; ?>
-
+            <article>
         <?php if ( isset($_GET["action"]) ) {
-            $action = $_GET["action"];
-            if ( $action == "newuser" ) :
-                $secret = $hemUsers->genToken( "newUser" ); ?>
+                $action = $_GET["action"];
+                if ( $action == "newuser" ) :
+                    $secret = $hemUsers->genToken( "newUser" ); ?>
+
+                    <form method="post" action="">
+                        <p>
+                            <label for="username">Username:</label><br />
+                            <input type="text" name="username" id="username" />
+                        </p>
+
+                        <p>
+                            <label for="password">Password:</label><br />
+                            <input type="password" name="password" id="password" />
+                        </p>
+
+                        <p>
+                            <label for="email">email:</label><br />
+                            <input type="email" name="email" id="email" />
+                        </p>
+
+                        <p>
+                            <label for="display_name">display name:</label><br />
+                            <input type="text" name="display_name" id="display_name" />
+                        </p>
+
+                        <p>
+                            <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
+                            <input type="submit" name="submit" value="Register" />
+                        </p>
+
+                    </form>
+
+                <?php endif; ?>
+
+            <?php } else {
+                $secret = $hemUsers->genToken( "login" ); ?>
 
                 <form method="post" action="">
                     <p>
@@ -101,50 +135,17 @@ get_header($pagetitle);
                         <label for="password">Password:</label><br />
                         <input type="password" name="password" id="password" />
                     </p>
-
-                    <p>
-                        <label for="email">email:</label><br />
-                        <input type="email" name="email" id="email" />
-                    </p>
-
-                    <p>
-                        <label for="display_name">display name:</label><br />
-                        <input type="text" name="display_name" id="display_name" />
-                    </p>
-
                     <p>
                         <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                        <input type="submit" name="submit" value="Register" />
+                        <input type="submit" name="submit" value="Login" />
                     </p>
 
                 </form>
 
-            <?php endif; ?>
+            <?php } ?>
 
-        <?php } else {
-            $secret = $hemUsers->genToken( "login" ); ?>
+            </article>
 
-            <form method="post" action="">
-                <p>
-                    <label for="username">Username:</label><br />
-                    <input type="text" name="username" id="username" />
-                </p>
+        </section>
 
-                <p>
-                    <label for="password">Password:</label><br />
-                    <input type="password" name="password" id="password" />
-                </p>
-                <p>
-                    <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                    <input type="submit" name="submit" value="Login" />
-                </p>
-
-            </form>
-
-        <?php } ?>
-
-
-
-    </body>
-</html>
-
+<?php get_footer(); ?>
