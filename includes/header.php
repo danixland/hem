@@ -1,17 +1,22 @@
 <?php
-require_once(dirname(__FILE__)."/../hem.inc.php");
+require_once(dirname(__FILE__) . "/../hem.inc.php");
 
 $hemUsers = new hemUsers();
 
-if( is_restricted() && !$hemUsers->logged_in ) {
-    header("Location: admin/login.php");
-    exit;
-}
-$user = $hemUsers->getSingleUser();
-if( $user ) {
-    $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x", false );
+if ( !is_restricted() ) {
+    if ( !$hemUsers->logged_in ) {
+        header("Location: admin/login.php");
+        exit;
+    } else {
+        $user = $hemUsers->getSingleUser();
+        if( $user ) {
+            $gravatar = $hemUsers->get_gravatar( $user["user_email"], 100, "identicon", "x", false );
+        } else {
+            die("The user could not be found...");
+        }
+    }
 } else {
-    die("The user could not be found...");
+    header("Location: admin/login.php");
 }
 
 ?>
