@@ -19,6 +19,6 @@ function the_title( $custom_title ) {
 
 function is_restricted($page = null) {
     $current_page = ( !$page ) ? pathinfo(basename($_SERVER["REQUEST_URI"]), PATHINFO_FILENAME) : $page;
-    return in_array($current_page, RESTRICTED_PAGES) ? true : false;
+    return in_array($current_page, unserialize(RESTRICTED_PAGES)) ? true : false;
 }
 ?>
