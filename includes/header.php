@@ -15,8 +15,6 @@ if ( is_restricted() ) {
             die("The user could not be found...");
         }
     }
-} else {
-    header("Location: ../admin/login.php");
 }
 
 ?>
