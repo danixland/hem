@@ -17,8 +17,8 @@ function the_title( $custom_title ) {
     return $title;
 }
 
-function is_restricted($page = null) {
-    $current_page = ( ! $page ) ? basename($_SERVER["REQUEST_URI"]) : $page;
+function is_restricted() {
+    $current_page = basename($_SERVER["REQUEST_URI"]);
     foreach (unserialize(RESTRICTED_PAGES) as $res_page) {
         return ( $current_page == $res_page . ".php") ? true : false;
     }
