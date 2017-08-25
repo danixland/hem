@@ -81,7 +81,7 @@ class hemBanking extends hemUsers {
 	* Use this function to permanently remove an account owned by the user. An optional id
 	* can be passed as argument to this function for an admin to operate on another user account.
 	*
-	*	@param	name	The name of the account you want to delete
+	*	@param	accId	The ID of the account you want to delete
 	*	@param	id		Can be used if administrative control is needed
 	*
 	*	@return			(bool) true on success or (bool) false otherwise
@@ -150,6 +150,33 @@ class hemBanking extends hemUsers {
 		return $accounts;
 	}
 
+	/**
+	* Use this function to permanently remove an account owned by the user. An optional id
+	* can be passed as argument to this function for an admin to operate on another user account.
+	*
+	*	@param	accId	The ID of the account you want to delete
+	*	@param	id		Can be used if administrative control is needed
+	*
+	*	@return			(bool) true on success or (bool) false otherwise
+	*/
+
+	public function deleteAllAccounts( $id = null ) {
+
+		if ( $id == NULL )
+			$id = parent::getID();
+
+		$sql = "DELETE FROM accounts WHERE owner=?";
+		if( !$this->stmt = $this->mysqli->prepare($sql) )
+			throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+
+		$this->stmt->bind_param("i", $id);
+		$this->stmt->execute();
+
+		if( $this->stmt->affected_rows > 0)
+			return true;
+
+		return false;
+	}
 
 	/**
 	* Check if an account owned by the user with the same name exists
