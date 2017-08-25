@@ -29,7 +29,7 @@ if ( isset($_GET["action"]) ) { // do we have an action?
                 $res = $hemUsers->createUser($_POST["username"], $_POST["password"], $_POST["email"], $display_name);
 
                 if(!$res) {
-                    $error = "User or Password already exists.";
+                    $error = "Username or Email already in our system.";
                 } else {
                     header("Location: ../main.php");
                     exit;
