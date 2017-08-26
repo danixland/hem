@@ -39,6 +39,12 @@
                 </ul>
             </nav>
 
+        <?php if( isset($error) ) : ?>
+            <article>
+                <p><?php echo $error; ?></p>
+            </article>
+        <?php endif; ?>
+
             <article>
                 <header>
                     <h3>accounts list</h3>
