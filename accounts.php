@@ -10,11 +10,12 @@
         $csrf = $hemUsers->validateToken("deleteAllAccounts");
         if( $csrf ) {
             try {
-                $res = $hemBanking->deleteAllAccounts();
+                $id = $hemUsers->getID();
+                $res = $hemBanking->deleteAllAccounts($id);
                 if(!$res) {
                     $error = "Error deleting accounts.";
                 } else {
-                    header("Location: accounts.php");
+                    header("Location: main.php");
                     exit;
                 }
             } catch (Exception $e) {
