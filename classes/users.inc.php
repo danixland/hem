@@ -261,7 +261,7 @@
 		* Deletes all information regarding a user.
 		* This is a void function.
 		*
-		* @param	id	The id of the user you wan't to delete
+		* @param	id	The id of the user you want to delete
 		*/
 
 		public function deleteUser( $id )

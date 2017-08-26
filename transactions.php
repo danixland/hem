@@ -27,8 +27,8 @@
 
             <article>
                 <header>
-                    <h3>accounts list</h3>
-                </header><!-- /header -->
+                    <h3>transactions list</h3>
+                </header>
                 <div>
                     here goes the transaction list.
                 </div>
