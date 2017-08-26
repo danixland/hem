@@ -30,7 +30,7 @@
             $count_blnc = $_POST["count_balance"];
         }
 
-        $csrf = $hemUsers->validateToken();
+        $csrf = $hemUsers->validateToken("newAccount");
 
         if( $csrf ) {
             try {
