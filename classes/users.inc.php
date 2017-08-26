@@ -297,8 +297,8 @@
 			$name = $secret . "_" . md5($salt);
 			$token = sha1($secret . $salt);
 			
-			$_SESSION[$this->sessionName]["hem_csrf_name"] = $name;
-			$_SESSION[$this->sessionName]["hem_csrf_token"] = $token;
+			$_SESSION[$this->sessionName]["hem_csrf_name_" . $secret] = $name;
+			$_SESSION[$this->sessionName]["hem_csrf_token_" . $secret] = $token;
 			
 			$string = array(
 				"name" => $name,
@@ -315,12 +315,12 @@
 		* @return bool true or false
 		*/
 		
-		public function validateToken()
+		public function validateToken( $secret )
 		{
-			$name = $_SESSION[$this->sessionName]["hem_csrf_name"];
-			$token = $_SESSION[$this->sessionName]["hem_csrf_token"];
-			unset($_SESSION[$this->sessionName]["hem_csrf_token"]);
-			unset($_SESSION[$this->sessionName]["hem_csrf_name"]);
+			$name = $_SESSION[$this->sessionName]["hem_csrf_name_" . $secret];
+			$token = $_SESSION[$this->sessionName]["hem_csrf_token_" . $secret];
+			unset($_SESSION[$this->sessionName]["hem_csrf_token_" . $secret]);
+			unset($_SESSION[$this->sessionName]["hem_csrf_name_" . $secret]);
 			
 			if($_POST[$name] == $token)
 				return true;

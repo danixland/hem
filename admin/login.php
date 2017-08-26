@@ -9,7 +9,7 @@ $hemUsers = new hemUsers();
 if ( isset($_GET["action"]) ) { // do we have an action?
     $action = $_GET["action"];
     if ($action == "logout") { // if the action is "logout"
-        $csrf = $hemUsers->validateToken();
+        $csrf = $hemUsers->validateToken("logout");
         if ( $csrf ) {
             $hemUsers->logoutUser();
             header("Location: ../index.php");
@@ -24,7 +24,7 @@ if ( isset($_GET["action"]) ) { // do we have an action?
             } else {
                 $display_name = $_POST["display_name"];
             }
-            $csrf = $hemUsers->validateToken();
+            $csrf = $hemUsers->validateToken("newuser");
             if ( $csrf ) {
                 $res = $hemUsers->createUser($_POST["username"], $_POST["password"], $_POST["email"], $display_name);
 
@@ -48,7 +48,7 @@ if ( isset($_GET["action"]) ) { // do we have an action?
         header("Location: ../main.php");
 
     if (isset($_POST["username"])) {
-        $csrf = $hemUsers->validateToken();
+        $csrf = $hemUsers->validateToken("login");
         if ( $csrf ) {
             $res = $hemUsers->loginUser($_POST["username"], $_POST["password"]);
             if(!$res) {

@@ -7,7 +7,7 @@
     $hemBanking = new hemBanking();
 
     if (isset($_POST["deleteAllAccounts"])) {
-        $csrf = $hemUsers->validateToken();
+        $csrf = $hemUsers->validateToken("deleteAllAccounts");
         if( $csrf ) {
             try {
                 $res = $hemBanking->deleteAllAccounts();
