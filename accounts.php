@@ -16,7 +16,6 @@
                     $error = "Error deleting accounts.";
                 } else {
                     header("Location: main.php");
-                    exit;
                 }
             } catch (Exception $e) {
                 header("Location: error.php?errorMsg=" . urlencode($e->getMessage()));
