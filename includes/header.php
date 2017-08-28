@@ -37,7 +37,7 @@ if ( is_restricted() ) {
     </head>
     <body>
         <header>
-            <h1><?php echo $custom_title; ?></h1>
+            <h1><?php echo ($custom_title) ? $custom_title : "Home Economy Manager"; ?></h1>
             <?php if ( $hemUsers->logged_in ) : ?>
             <img src="<?php echo $gravatar; ?>" alt="<?php echo $user['display_name']; ?>'s gravatar">
             <h2>Hello <strong><?php echo $user["display_name"]; ?></strong></h2>
