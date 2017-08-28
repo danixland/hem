@@ -5,9 +5,7 @@
 	$hemUsers = new hemUsers();
     $hemBanking = new hemBanking();
 
-    $pagetitle = "Your Accounts";
-
-    get_header($pagetitle);
+    get_header();
 ?>
 		<section>
             <nav>
