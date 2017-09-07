@@ -6,26 +6,6 @@
     $hemUsers = new hemUsers();
     $hemBanking = new hemBanking();
 
-    if (isset($_POST["deleteAllAccounts"])) {
-        $csrf = $hemUsers->validateToken("deleteAllAccounts");
-        if( $csrf ) {
-            try {
-                $id = $hemUsers->getID();
-                $res = $hemBanking->deleteAllAccounts($id);
-                if(!$res) {
-                    $error = "Error deleting accounts.";
-                } else {
-                    header("Location: main.php");
-                }
-            } catch (Exception $e) {
-                header("Location: error.php?errorMsg=" . urlencode($e->getMessage()));
-            }
-        } else {
-            $error = "csrf motherfoca!!";
-        }
-
-    }
-
     $pagetitle = "Your Accounts";
 
     get_header($pagetitle);
@@ -56,15 +36,6 @@
                         print_r($accounts);
                         ?>
                     </pre>
-                </div>
-                <div>
-                    <?php $secret = $hemUsers->genToken( "deleteAllAccounts" ); ?>
-                    <form action="" method="post">
-                        <p>
-                            <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                            <input type="submit" name="delete all accounts" value="deleteAllAccounts" />
-                        </p>
-                    </form>
                 </div>
             </article>
 
