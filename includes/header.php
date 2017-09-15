@@ -45,7 +45,7 @@ if ( is_restricted() ) {
             <form action="admin/login.php?action=logout" method="post">
                 <p>
                     <input type="hidden" name="<?php echo $secret["name"]; ?>" value="<?php echo $secret["token"]; ?>">
-                    <input type="submit" name="submit" value="logout" />
+                    <input type="submit" name="submit" value="logout">
                 </p>
             </form>
             <?php endif; ?>

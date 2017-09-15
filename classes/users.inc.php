@@ -225,8 +225,7 @@
 		* @return	An array with the result or (bool)false.
 		*/
 
-		public function getSingleUser( $id = null )
-		{
+		public function getSingleUser( $id = null ) {
 
 			if( $id == null )
 				$id = $_SESSION[$this->sessionName]["id"];
